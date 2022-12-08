@@ -1,4 +1,4 @@
-import 'dart:html';
+//import 'dart:html';
 
 import 'package:flutter/material.dart';
 //import 'package:flutter_app/themes/default_theme.dart';
@@ -19,27 +19,31 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Home'),
+          title: const Text('Coldplay - Music of the Spheres'),
           centerTitle: true,
           elevation: 10.0,
         ),
-        //drawer: DrawerMenu(),
+        drawer: const DrawerMenu(),
         body: Center(
-          child: Column(children: [
-            const Text("Hola!",
+          // ignore: prefer_const_literals_to_create_immutables
+          child: Container(
+              /*const Text("Hola!",
                 style: TextStyle(
                   fontSize: 25,
                   color: Colors.black,
-                )),
-            FadeInImage(
-              placeholder: const AssetImage('assets/images/loading.gif'),
-              image: const NetworkImage(
-                  'https://www.solofondos.com/wp-content/uploads/2017/09/para-celular-fondos-de-pantalla-im%C3%A1genes-1.jpg'),
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: size.height * 0.35,
-            )
-          ]),
+                )),*/
+              // ignore: prefer_const_constructors
+
+              child: const FadeInImage(
+            placeholder: AssetImage('assets/images/loading.gif'),
+            image:
+                AssetImage('assets/images/coldplay_music_of_the_spheres.jpg'),
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: 564,
+
+            // ancho y alto del dispositivo : 420 x 620
+          )),
         ));
   }
 }
