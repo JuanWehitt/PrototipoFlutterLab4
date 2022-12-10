@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prototipo_flutter_lab4/pages/card_page.dart';
 import 'package:prototipo_flutter_lab4/pages/pages.dart';
 
 void main() {
@@ -21,7 +22,12 @@ class MyApp extends StatelessWidget {
         initialRoute: 'home',
         routes: {
           'home': (context) => const HomePage(),
-          'listaRegistros': (context) => const ListViewPage(),
+          'listaTracks': (context) => const ListViewPage(),
+          'cardTrack': (context) => const CardPage(
+                nombre: "juan",
+                autores: "autores",
+                compositores: "compo",
+              ),
         });
   }
 }

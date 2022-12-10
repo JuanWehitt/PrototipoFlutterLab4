@@ -22,7 +22,7 @@ class DrawerMenu extends StatelessWidget {
             title: const Text('Lista de canciones'),
             leading: const Icon(Icons.double_arrow_outlined),
             onTap: () {
-              Navigator.pushReplacementNamed(context, 'listaRegistros');
+              Navigator.pushReplacementNamed(context, 'listaTracks');
             },
           ),
           const Divider(height: 5),
@@ -42,7 +42,7 @@ class _DrawerHeader extends StatelessWidget {
     return DrawerHeader(
       decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/background_menu_drawer2.png'),
+              image: AssetImage('assets/images/coldplay-1-2-logo.gif'),
               fit: BoxFit.fill,
               opacity: 0.9)),
       child: Container(

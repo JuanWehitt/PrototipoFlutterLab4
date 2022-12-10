@@ -24,26 +24,17 @@ class _HomePageState extends State<HomePage> {
           elevation: 10.0,
         ),
         drawer: const DrawerMenu(),
+        // ignore: prefer_const_constructors
         body: Center(
-          // ignore: prefer_const_literals_to_create_immutables
-          child: Container(
-              /*const Text("Hola!",
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.black,
-                )),*/
-              // ignore: prefer_const_constructors
-
-              child: const FadeInImage(
+          child: const FadeInImage(
             placeholder: AssetImage('assets/images/loading.gif'),
             image:
                 AssetImage('assets/images/coldplay_music_of_the_spheres.jpg'),
             fit: BoxFit.cover,
             width: double.infinity,
             height: 564,
-
             // ancho y alto del dispositivo : 420 x 620
-          )),
+          ),
         ));
   }
 }
