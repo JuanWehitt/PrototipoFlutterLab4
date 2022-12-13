@@ -27,8 +27,8 @@ class CardTrack extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(fontFamily: 'FuzzyBubbles'),
               ),
-              subtitle: const Text(
-                'Ea consectetur ex fugiat id commodo sit sint dolore minim ut aute. Et veniam excepteur duis nisi eu sint do. Et veniam excepteur duis nisi eu sint do. Ea consectetur ex fugiat id commodo sit sint dolore minim ut aute. Et veniam excepteur duis nisi eu sint do.',
+              subtitle: Text(
+                compositores,
                 style: TextStyle(fontSize: 14, fontFamily: 'FuzzyBubbles'),
                 maxLines: 8,
                 overflow: TextOverflow.ellipsis,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:prototipo_flutter_lab4/pages/card_page.dart';
+import 'package:prototipo_flutter_lab4/pages/track_page.dart';
 import 'package:prototipo_flutter_lab4/pages/pages.dart';
 
 void main() {
