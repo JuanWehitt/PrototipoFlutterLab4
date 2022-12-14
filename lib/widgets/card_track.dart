@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:prototipo_flutter_lab4/pages/lista_tracks.dart';
 
 class CardTrack extends StatelessWidget {
-  final String nombre;
-  final String autores;
-  final String compositores;
+  final int nro;
 
-  const CardTrack(
-      {required this.nombre,
-      required this.autores,
-      required this.compositores,
-      super.key});
+  const CardTrack({required this.nro, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +15,17 @@ class CardTrack extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
-              leading: Icon(Icons.image),
+              leading: Icon(Icons.music_note_sharp),
               title: Text(
-                nombre,
+                ListViewPage.listaDeTracks[nro]['title'].toString(),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(fontFamily: 'FuzzyBubbles'),
               ),
               subtitle: Text(
-                compositores,
+                ListViewPage.listaDeTracks[nro]['compositores'].toString(),
                 style: TextStyle(fontSize: 14, fontFamily: 'FuzzyBubbles'),
-                maxLines: 8,
+                maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.left,
               ),
