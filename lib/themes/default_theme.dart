@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DefaultTheme {
-  static const Color primary = Colors.green;
-  static final Color primaryHover = Colors.green.shade600;
+  static const Color primary = Color.fromARGB(255, 71, 50, 255);
+  static final Color primaryHover = Colors.cyan;
 
   static final ThemeData defaultTheme = ThemeData.light().copyWith(
     primaryColor: Colors.blueGrey,
@@ -14,7 +14,7 @@ class DefaultTheme {
         style: TextButton.styleFrom(
             backgroundColor: Colors.transparent, foregroundColor: primary)),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: primary, foregroundColor: Colors.amber),
+        backgroundColor: primary, foregroundColor: Colors.white),
     listTileTheme: const ListTileThemeData(iconColor: primary),
   );
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prototipo_flutter_lab4/themes/default_theme.dart';
 
 class DrawerMenu extends StatelessWidget {
   const DrawerMenu({super.key});
@@ -48,8 +49,8 @@ class _DrawerHeader extends StatelessWidget {
       child: Container(
         alignment: Alignment.bottomRight,
         child: const Text(
-          '[  Menu  ]',
-          style: TextStyle(color: Colors.indigoAccent, fontSize: 19),
+          'Menu',
+          style: TextStyle(color: DefaultTheme.primary, fontSize: 19),
           textAlign: TextAlign.right,
         ),
       ),
