@@ -32,6 +32,15 @@ class CardTrack extends StatelessWidget {
               minVerticalPadding: 15,
               minLeadingWidth: 30,
             ),
+            // ignore: prefer_const_constructors
+            FadeInImage(
+              placeholder: AssetImage('assets/images/loading.gif'),
+              image: AssetImage("assets/images/coldplay-1-2-logo.gif"),
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: 450,
+              fadeInDuration: const Duration(milliseconds: 600),
+            ),
           ],
         ),
       ),
