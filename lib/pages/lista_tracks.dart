@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-
+import 'package:prototipo_flutter_lab4/themes/default_theme.dart';
 import '../widgets/widgets.dart';
 
-class ListViewPage extends StatelessWidget {
-  //static final List<String> listaDeTraks = List.empty(growable: false);
+class ListViewPage extends StatefulWidget {
+  const ListViewPage({super.key});
+
   static int seleccionado = 1;
   static final List<Map<String, String>> listaDeTracks = <Map<String, String>>[
     {
@@ -18,7 +19,31 @@ class ListViewPage extends StatelessWidget {
       'compositores': 'Coldplay - M. Martin - Federico Vindver - Denise Carite'
     }
   ];
-  const ListViewPage({super.key});
+
+  @override
+  State<ListViewPage> createState() => _CustomListViewPageState();
+}
+
+class _CustomListViewPageState extends State<ListViewPage> {
+  double _opacityLevel = 0;
+
+  ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    Future.delayed(const Duration(milliseconds: 300), () {
+      _scrollController.addListener(() {
+        //print(
+        //'pixel ${_scrollController.position.pixels} maxScrollExtent: ${_scrollController.position.maxScrollExtent}');
+      });
+
+      _opacityLevel = 1;
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,46 +52,34 @@ class ListViewPage extends StatelessWidget {
           title: const Text('Canciones del album'),
         ),
         drawer: const DrawerMenu(),
-        body: ListView.separated(
-          physics: const BouncingScrollPhysics(),
-          // ignore: prefer_const_literals_to_create_immutables
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              title:
-                  Text(ListViewPage.listaDeTracks[index]['title'].toString()),
-              leading: Icon(Icons.audiotrack),
-              trailing: Icon(Icons.arrow_forward_rounded),
-              subtitle: Text(
-                  ListViewPage.listaDeTracks[index]['compositores'].toString()),
-              onTap: () {
-                seleccionado = index;
-                Navigator.pushReplacementNamed(context, 'cardTrack');
-              },
-            );
-          },
-          itemCount: ListViewPage.listaDeTracks.length,
-          separatorBuilder: (_, __) {
-            return const Divider(height: 5);
-          },
-          /*children: [
-            ListTile(
-              title: Text('Music of the Spheres I'),
-              leading: Icon(Icons.audiotrack),
-              trailing: Icon(Icons.arrow_forward_rounded),
-              subtitle: const Text(
-                  'Coldplay - Max Martin - Rik Simpson-- Daniel Green - Federico Vindver - Bill Rahko'),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, 'cardTrack');
-              },
-            ),
-            const ListTile(
-              title: Text('Higher Power'),
-              leading: Icon(Icons.audiotrack),
-              trailing: Icon(Icons.arrow_forward_rounded),
-              subtitle: Text(
-                  'Coldplay - M. Martin - Federico Vindver - Denise Carite'),
-            ),
-          ]),*/
-        ));
+        body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: AnimatedOpacity(
+              opacity: _opacityLevel,
+              duration: const Duration(milliseconds: 500),
+              child: ListView.separated(
+                physics: const BouncingScrollPhysics(),
+                // ignore: prefer_const_literals_to_create_immutables
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    title: Text(
+                        ListViewPage.listaDeTracks[index]['title'].toString()),
+                    leading: Icon(Icons.audiotrack),
+                    trailing: Icon(Icons.arrow_forward_rounded),
+                    subtitle: Text(ListViewPage.listaDeTracks[index]
+                            ['compositores']
+                        .toString()),
+                    onTap: () {
+                      ListViewPage.seleccionado = index;
+                      Navigator.pushReplacementNamed(context, 'cardTrack');
+                    },
+                  );
+                },
+                itemCount: ListViewPage.listaDeTracks.length,
+                separatorBuilder: (_, __) {
+                  return const Divider(height: 5);
+                },
+              ),
+            )));
   }
 }
