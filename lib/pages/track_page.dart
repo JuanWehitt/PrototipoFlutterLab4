@@ -32,8 +32,40 @@ class CardPage extends StatelessWidget {
           ),
           // ignore: prefer_const_constructors
           body: ListView(children: [CardTrack(nro: ListViewPage.seleccionado)]),
-          floatingActionButton: const FavoritoActionButton()),
+          floatingActionButton: const FavoritoActionButton(),
+          bottomNavigationBar: ControlNavigation()),
     );
+  }
+}
+
+class ControlNavigation extends StatelessWidget {
+  ControlNavigation({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final botonera = Provider.of<_handlerPage>(context);
+
+    return BottomNavigationBar(
+        currentIndex: botonera.botonActual,
+        onTap: (value) {
+          botonera.botonActual = value;
+        },
+        selectedLabelStyle: DefaultTheme
+            .defaultTheme.bottomNavigationBarTheme.selectedLabelStyle,
+        selectedIconTheme: DefaultTheme
+            .defaultTheme.bottomNavigationBarTheme.selectedIconTheme,
+        unselectedIconTheme: DefaultTheme
+            .defaultTheme.bottomNavigationBarTheme.unselectedIconTheme,
+        enableFeedback: false,
+        elevation: 10,
+        items: const [
+          BottomNavigationBarItem(
+              label: 'Info', icon: Icon(Icons.music_note_rounded)),
+          BottomNavigationBarItem(
+              label: 'Letra', icon: Icon(Icons.lyrics_rounded)),
+          BottomNavigationBarItem(
+              label: 'Mis Notas', icon: Icon(Icons.queue_music_rounded)),
+        ]);
   }
 }
 
@@ -59,6 +91,7 @@ class FavoritoActionButton extends StatelessWidget {
 
 class _handlerPage extends ChangeNotifier {
   bool _meGusta = false;
+  int _botonActual = 0;
 
   bool get meGusta => _meGusta;
 
@@ -70,6 +103,13 @@ class _handlerPage extends ChangeNotifier {
   void toggle() {
     _meGusta = !_meGusta;
     //print(_meGusta);
+    notifyListeners();
+  }
+
+  int get botonActual => _botonActual;
+
+  set botonActual(int value) {
+    _botonActual = value;
     notifyListeners();
   }
 }
