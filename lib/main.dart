@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         routes: {
           'home': (context) => const HomePage(),
           'listaTracks': (context) => const ListViewPage(),
-          'cardTrack': (context) => const CardPage(),
+          'cardTrack': (context) => CardPage(),
         });
   }
 }

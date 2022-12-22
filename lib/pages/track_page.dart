@@ -8,7 +8,12 @@ import '../widgets/widgets.dart';
 class CardPage extends StatelessWidget {
   //final int nro;
 
-  const CardPage({super.key});
+  CardPage({super.key});
+
+  final PageController pageController = PageController(
+    initialPage: 0,
+    //viewportFraction:0.5
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +36,14 @@ class CardPage extends StatelessWidget {
             automaticallyImplyLeading: false,
           ),
           // ignore: prefer_const_constructors
-          body: ListView(children: [CardTrack(nro: ListViewPage.seleccionado)]),
+          body: SizedBox(
+            width: double.infinity,
+            child: PageView(
+              controller: pageController,
+              scrollDirection: Axis.horizontal,
+              children: [CardTrack(nro: ListViewPage.seleccionado)],
+            ),
+          ),
           floatingActionButton: const FavoritoActionButton(),
           bottomNavigationBar: ControlNavigation()),
     );
