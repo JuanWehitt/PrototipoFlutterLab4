@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:prototipo_flutter_lab4/model/album.dart';
 import 'package:prototipo_flutter_lab4/pages/lista_tracks.dart';
 
-class CardTrack extends StatelessWidget {
+class NotesTrack extends StatelessWidget {
   final int nro;
 
-  const CardTrack({required this.nro, super.key});
+  const NotesTrack({required this.nro, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class CardTrack extends StatelessWidget {
                 image: AssetImage("assets/images/coldplay-1-2-logo.gif"),
                 fit: BoxFit.cover,
                 width: double.infinity,
-                height: 400,
+                height: 450,
                 fadeInDuration: const Duration(milliseconds: 600),
               ),
             ],
