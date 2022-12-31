@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prototipo_flutter_lab4/pages/lista_tracks.dart';
 import 'package:prototipo_flutter_lab4/themes/default_theme.dart';
-import 'package:prototipo_flutter_lab4/widgets/card_track.dart';
 import 'package:provider/provider.dart';
 import '../widgets/widgets.dart';
 
@@ -39,10 +38,12 @@ class CardPage extends StatelessWidget {
           body: SizedBox(
             width: double.infinity,
             child: PageView(
-              controller: pageController,
-              scrollDirection: Axis.horizontal,
-              children: [CardTrack(nro: ListViewPage.seleccionado)],
-            ),
+                controller: pageController,
+                scrollDirection: Axis.horizontal,
+                children: [
+                  CardTrack(nro: ListViewPage.seleccionado),
+                  NotesTrack(nro: ListViewPage.seleccionado)
+                ]),
           ),
           floatingActionButton: const FavoritoActionButton(),
           bottomNavigationBar: ControlNavigation()),
@@ -73,8 +74,6 @@ class ControlNavigation extends StatelessWidget {
         items: const [
           BottomNavigationBarItem(
               label: 'Info', icon: Icon(Icons.music_note_rounded)),
-          BottomNavigationBarItem(
-              label: 'Letra', icon: Icon(Icons.lyrics_rounded)),
           BottomNavigationBarItem(
               label: 'Mis Notas', icon: Icon(Icons.queue_music_rounded)),
         ]);
