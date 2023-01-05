@@ -26,8 +26,8 @@ class ArtistProvider extends ChangeNotifier {
 
   ArtistProvider() {
     _apiToken =
-        "BQBQAkFkQNXMhv3lhjUv8m19fk1SyTpRkFsRj28V7RPiAzWD8vr2VE9E8VpMB5kqoyr8UCx6weCrihb35bAErlhrPus01yMPBeTYBbPG4Gbx3IuGtCWMt_Jhd6hVh2uOB2yVKNZpPf7hMSxYJzDmqTajT0oGO7DmITtnSRTwZGazNfX76yJRmkBfd9CMb_7n_qFdeZtb7hL46Ibcz1JY-g";
-    print('ArtistProvider   init....................');
+        "BQBAPc3-XRzSZ7vJBEsIyiFCoBdB9lTW9Ogtw_vM7WgwhRxVv27KBl0qKg8rXmUAfp7jRfIoLRdD9gBUpYIHto09n6qO6uQ6XDoNxsetm78uyoazCden6DqgWpnWt8-rsixU7s8ZWL6KZhttc9-Tf_5b23uU2DYsHzdCJVMnlCbHB_ZWbKOytRD7xJuyCV-gFIxKu4MB10yIYvaZp3TxCQ";
+    //print('ArtistProvider   init....................');
     this.getInfo();
   }
 
@@ -41,7 +41,7 @@ class ArtistProvider extends ChangeNotifier {
       //print(response.body);
       if (artist.code == 200) {
         this.loadData = true;
-        print(artist.data.images[0].url);
+        //print(artist.data.images[0].url);
         this.artista = artist.data;
       } else {
         print("No hay resultados revise el token");

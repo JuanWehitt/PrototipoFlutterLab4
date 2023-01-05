@@ -46,18 +46,65 @@ class BodyHome extends StatelessWidget {
       );
     }
 
-    /*return FadeInImage(
-        placeholder: AssetImage('assets/images/loading.gif'),
-        image: NetworkImage(artist.artista.images[0].url));
-*/
     return Container(
-        decoration: BoxDecoration(
-      image: DecorationImage(
-        image: NetworkImage(artist.artista.images[0].url),
-        fit: BoxFit.cover,
-        colorFilter:
-            ColorFilter.mode(Colors.white.withOpacity(0.8), BlendMode.color),
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage(artist.artista.images[0].url),
+          fit: BoxFit.cover,
+          colorFilter: ColorFilter.mode(
+              Colors.blueGrey.withOpacity(0.9), BlendMode.color),
+        ),
       ),
-    ));
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 300),
+          child: Column(children: [
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.favorite,
+                  size: 50,
+                  color: Colors.red,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.7),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Text(
+                    " " + artist.artista.followers.total.toString() + " ",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Text(
+                  "seguidores en",
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontFamily: 'PaytoneOne',
+                      fontWeight: FontWeight.normal,
+                      color: Colors.white),
+                ),
+                Padding(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child: Container(
+                      width: 193,
+                      height: 76,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(15),
+                        //color: Colors.black54,
+                        image: DecorationImage(
+                          image: AssetImage("images/spotify_logo.png"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ))
+              ],
+            ),
+          ]),
+        ),
+      ),
+    );
   }
 }
