@@ -77,14 +77,20 @@ class BodyHome extends StatelessWidget {
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ),
-                Text(
-                  "seguidores en",
-                  style: TextStyle(
+                const Text("seguidores en",
+                    style: TextStyle(
                       fontSize: 25,
                       fontFamily: 'PaytoneOne',
-                      fontWeight: FontWeight.normal,
-                      color: Colors.white),
-                ),
+                      fontWeight: FontWeight.w300,
+                      color: Colors.white,
+                      shadows: [
+                        Shadow(
+                          blurRadius: 3.0,
+                          color: Colors.black,
+                          offset: Offset(3.0, 3.0),
+                        ),
+                      ],
+                    )),
                 Padding(
                     padding: const EdgeInsets.only(top: 5.0),
                     child: Container(
