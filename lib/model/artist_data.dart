@@ -1,6 +1,7 @@
 class ArtistData {
   ExternalUrls externalUrls;
   Followers followers;
+  //int followers;
   String href;
   String id;
   List<Image> images;
@@ -20,22 +21,13 @@ class ArtistData {
   factory ArtistData.fromJson(Map<String, dynamic> json) => ArtistData(
         externalUrls: ExternalUrls.fromJson(json["external_urls"]),
         followers: Followers.fromJson(json["followers"]),
+        //followers: json["followers"]["total"],
         href: json["href"],
         id: json["id"],
         images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
         name: json["name"],
         popularity: json["popularity"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "external_urls": externalUrls.toJson(),
-        "followers": followers.toJson(),
-        "href": href,
-        "id": id,
-        "images": List<dynamic>.from(images.map((x) => x.toJson())),
-        "name": name,
-        "popularity": popularity,
-      };
 }
 
 class ExternalUrls {
@@ -46,32 +38,23 @@ class ExternalUrls {
   });
 
   factory ExternalUrls.fromJson(Map<String, dynamic> json) => ExternalUrls(
-        spotify: json["spotify"],
+        spotify: json["spotify"] == null ? null : json["spotify"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "spotify": spotify,
-      };
 }
 
 class Followers {
-  dynamic href;
+  String href;
   int total;
 
   Followers({
-    required this.href,
+    this.href = "",
     required this.total,
   });
 
   factory Followers.fromJson(Map<String, dynamic> json) => Followers(
-        href: json["href"],
+        href: json["href"] == null ? null : json["href"],
         total: json["total"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "href": href,
-        "total": total,
-      };
 }
 
 class Image {
@@ -90,10 +73,4 @@ class Image {
         url: json["url"],
         width: json["width"],
       );
-
-  Map<String, dynamic> toJson() => {
-        "height": height,
-        "url": url,
-        "width": width,
-      };
 }

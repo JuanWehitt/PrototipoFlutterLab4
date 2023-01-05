@@ -12,27 +12,52 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      lazy: false,
-      create: (BuildContext context) => ArtistProvider(),
-      child: Scaffold(
+        lazy: false,
+        create: (BuildContext context) => ArtistProvider(),
+        child: Scaffold(
           appBar: AppBar(
-            title: const Text('Coldplay - Music of the Spheres'),
+            title: const Text('Coldplay'),
             centerTitle: true,
             elevation: 10.0,
           ),
           drawer: const DrawerMenu(),
           // ignore: prefer_const_constructors
-          body: Center(
-            child: const FadeInImage(
-              placeholder: AssetImage('assets/images/loading.gif'),
-              image:
-                  AssetImage('assets/images/coldplay_music_of_the_spheres.jpg'),
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: 564,
-              // ancho y alto del dispositivo : 420 x 620
-            ),
-          )),
-    );
+          body: BodyHome(),
+        ));
+  }
+}
+
+class BodyHome extends StatelessWidget {
+  const BodyHome({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final artist = Provider.of<ArtistProvider>(context);
+
+    if (!artist.loadData) {
+      return const Center(
+        child: SizedBox(
+          width: 60,
+          height: 60,
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
+    /*return FadeInImage(
+        placeholder: AssetImage('assets/images/loading.gif'),
+        image: NetworkImage(artist.artista.images[0].url));
+*/
+    return Container(
+        decoration: BoxDecoration(
+      image: DecorationImage(
+        image: NetworkImage(artist.artista.images[0].url),
+        fit: BoxFit.cover,
+        colorFilter:
+            ColorFilter.mode(Colors.white.withOpacity(0.8), BlendMode.color),
+      ),
+    ));
   }
 }

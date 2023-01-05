@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -9,36 +11,44 @@ class ArtistProvider extends ChangeNotifier {
   String _apiToken = dotenv.env['API_TOKEN_SPOTIFY'].toString();
   final String _baseUrl = 'localhost:3000';
   final String _idArtist = "4gzpq5DPGxSnKTe4SA8HAU";
-  //Artist artist;
-  //List<PhotoInfo> photos = [];
+  bool loadData = false;
+  Data artista = Data(
+      externalUrls: ExternalUrls(spotify: "spotify"),
+      followers: Followers(href: "href", total: 0),
+      genres: [],
+      href: "href",
+      id: "id",
+      images: [],
+      name: "name",
+      popularity: 0,
+      type: "type",
+      uri: "uri");
 
   ArtistProvider() {
     _apiToken =
-        "BQCm4TX4WGZt4ka4K9uHO7rym3JXEvVNi-C8H961DuZMqL_YzYJSHvATXb7dXcbjdN--VArNbBddAaZOTfwrPkVsJUCBGrldU02j6l2M1WQcXgaLrg4frxK6HvNHK-ITM7WKVWkFeVBw67VC6NgRKm0tYy2qTNwilKqEuwmy6ZdLA5PFTAH9rIOmPxyCqRD5xYweL_Nxpyfmc_aNCHji0g";
+        "BQBQAkFkQNXMhv3lhjUv8m19fk1SyTpRkFsRj28V7RPiAzWD8vr2VE9E8VpMB5kqoyr8UCx6weCrihb35bAErlhrPus01yMPBeTYBbPG4Gbx3IuGtCWMt_Jhd6hVh2uOB2yVKNZpPf7hMSxYJzDmqTajT0oGO7DmITtnSRTwZGazNfX76yJRmkBfd9CMb_7n_qFdeZtb7hL46Ibcz1JY-g";
     print('ArtistProvider   init....................');
     this.getInfo();
   }
 
   getInfo() async {
     final url = Uri.http(_baseUrl, "/artist/$_idArtist");
-    //final url = Uri.parse(_baseUrl + "/artist/$_idArtist");
-    //print(url);
-    print(_apiToken);
-    final response = await http.get(url, headers: {'access_token': _apiToken});
-    //print(url);
-    var data;
-    data = json.decode(response.body);
-    if (data['code'] == 200) {
-      data = ArtistModel.fromJson(response.body);
-      print(data);
-    } else {
-      print("No hay resultados revise el token");
-      //print(data);
+
+    try {
+      final response =
+          await http.get(url, headers: {'access_token': _apiToken});
+      final artist = ArtistModel.fromJson(response.body);
+      //print(response.body);
+      if (artist.code == 200) {
+        this.loadData = true;
+        print(artist.data.images[0].url);
+        this.artista = artist.data;
+      } else {
+        print("No hay resultados revise el token");
+      }
+    } catch (e) {
+      print('error $e');
     }
-    //final data = NewPhotosModel.fromJson(response.body);
-
-    //this.photos = [...data];
-
     notifyListeners();
   }
 }
