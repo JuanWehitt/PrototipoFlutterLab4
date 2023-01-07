@@ -1,35 +1,120 @@
-import 'package:prototipo_flutter_lab4/model/track.dart';
+// To parse this JSON data, do
+//
+//     final album = albumFromJson(jsonString);
+
+import 'dart:convert';
+
+class AlbumModel {
+  static AlbumData fromJson(String str) => AlbumData.fromJson(json.decode(str));
+}
+
+class AlbumData {
+  int code;
+  String status;
+  Data data;
+
+  AlbumData({
+    required this.code,
+    required this.status,
+    required this.data,
+  });
+
+  factory AlbumData.fromJson(Map<String, dynamic> json) => AlbumData(
+        code: json["code"],
+        status: json["status"],
+        data: Data.fromJson(json["data"]),
+      );
+}
+
+class Data {
+  String href;
+  List<Album> items;
+
+  Data({
+    required this.href,
+    required this.items,
+  });
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+        href: json["href"],
+        items: List<Album>.from(json["items"].map((x) => Album.fromJson(x))),
+      );
+}
 
 class Album {
-  String _nombre = '';
-  int _cantTracks = 0;
-  List<Track> _tracks = [];
+  List<Artist> artists;
+  ExternalUrls externalUrls;
+  String href;
+  String id;
+  List<Image> images;
+  String name;
+  DateTime releaseDate;
+  int totalTracks;
+  String uri;
 
-  Album(String nombre) {
-    _nombre = nombre;
-  }
+  Album({
+    required this.artists,
+    required this.externalUrls,
+    required this.href,
+    required this.id,
+    required this.images,
+    required this.name,
+    required this.releaseDate,
+    required this.totalTracks,
+    required this.uri,
+  });
 
-  void addTrack(Track track) {
-    _tracks.add(track);
-  }
+  factory Album.fromJson(Map<String, dynamic> json) => Album(
+        artists:
+            List<Artist>.from(json["artists"].map((x) => Artist.fromJson(x))),
+        externalUrls: ExternalUrls.fromJson(json["external_urls"]),
+        href: json["href"],
+        id: json["id"],
+        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
+        name: json["name"],
+        releaseDate: DateTime.parse(json["release_date"]),
+        totalTracks: json["total_tracks"],
+        uri: json["uri"],
+      );
+}
 
-  void deleteTrack(Track track) {
-    _tracks.remove(track);
-  }
+class Artist {
+  String name;
 
-  Track getTrack(int index) {
-    return _tracks.elementAt(index);
-  }
+  Artist({
+    required this.name,
+  });
 
-  int get cantTracks => _cantTracks;
+  factory Artist.fromJson(Map<String, dynamic> json) => Artist(
+        name: json["name"],
+      );
+}
 
-  set cantTracks(int cantTracks) {
-    _cantTracks = cantTracks;
-  }
+class ExternalUrls {
+  String spotify;
 
-  String get nombre => _nombre;
+  ExternalUrls({
+    required this.spotify,
+  });
 
-  set nombre(String nombre) {
-    _nombre = nombre;
-  }
+  factory ExternalUrls.fromJson(Map<String, dynamic> json) => ExternalUrls(
+        spotify: json["spotify"],
+      );
+}
+
+class Image {
+  int height;
+  String url;
+  int width;
+
+  Image({
+    required this.height,
+    required this.url,
+    required this.width,
+  });
+  factory Image.fromJson(Map<String, dynamic> json) => Image(
+        height: json["height"],
+        url: json["url"],
+        width: json["width"],
+      );
 }

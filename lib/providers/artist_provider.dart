@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
+import 'package:prototipo_flutter_lab4/main.dart';
 import 'package:prototipo_flutter_lab4/model/artist.dart';
 
 class ArtistProvider extends ChangeNotifier {
@@ -12,7 +13,7 @@ class ArtistProvider extends ChangeNotifier {
   final String _baseUrl = 'localhost:3000';
   final String _idArtist = "4gzpq5DPGxSnKTe4SA8HAU";
   bool loadData = false;
-  Data artista = Data(
+  ArtistData artista = ArtistData(
       externalUrls: ExternalUrls(spotify: "spotify"),
       followers: Followers(href: "href", total: 0),
       genres: [],
@@ -25,9 +26,7 @@ class ArtistProvider extends ChangeNotifier {
       uri: "uri");
 
   ArtistProvider() {
-    _apiToken =
-        "BQBAPc3-XRzSZ7vJBEsIyiFCoBdB9lTW9Ogtw_vM7WgwhRxVv27KBl0qKg8rXmUAfp7jRfIoLRdD9gBUpYIHto09n6qO6uQ6XDoNxsetm78uyoazCden6DqgWpnWt8-rsixU7s8ZWL6KZhttc9-Tf_5b23uU2DYsHzdCJVMnlCbHB_ZWbKOytRD7xJuyCV-gFIxKu4MB10yIYvaZp3TxCQ";
-    //print('ArtistProvider   init....................');
+    _apiToken = MyApp().token;
     this.getInfo();
   }
 

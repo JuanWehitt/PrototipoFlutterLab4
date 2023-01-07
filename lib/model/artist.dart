@@ -1,18 +1,3 @@
-/*//     final ArtistModel = ArtistModelFromJson(jsonString);
-import 'package:prototipo_flutter_lab4/model/artist_data.dart';
-import 'dart:convert';
-
-//String ArtistModelToJson(ArtistModel data) => json.encode(data.toJson());
-
-class ArtistModel {
-  static ArtistData fromJson(String str) =>
-      ArtistData.fromJson(json.decode(str));
-}*/
-
-// To parse this JSON data, do
-//
-//     final welcome = welcomeFromJson(jsonString);
-
 import 'dart:convert';
 
 class ArtistModel {
@@ -22,7 +7,7 @@ class ArtistModel {
 class Artist {
   int code;
   String status;
-  Data data;
+  ArtistData data;
 
   Artist({
     required this.code,
@@ -33,11 +18,11 @@ class Artist {
   factory Artist.fromJson(Map<String, dynamic> json) => Artist(
         code: json["code"],
         status: json["status"],
-        data: Data.fromJson(json["data"]),
+        data: ArtistData.fromJson(json["data"]),
       );
 }
 
-class Data {
+class ArtistData {
   ExternalUrls externalUrls;
   Followers followers;
   List<String> genres;
@@ -49,7 +34,7 @@ class Data {
   String type;
   String uri;
 
-  Data({
+  ArtistData({
     required this.externalUrls,
     required this.followers,
     required this.genres,
@@ -62,7 +47,7 @@ class Data {
     required this.uri,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory ArtistData.fromJson(Map<String, dynamic> json) => ArtistData(
         externalUrls: ExternalUrls.fromJson(json["external_urls"]),
         followers: Followers.fromJson(json["followers"]),
         genres: List<String>.from(json["genres"].map((x) => x)),

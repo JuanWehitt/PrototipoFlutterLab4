@@ -1,86 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:prototipo_flutter_lab4/providers/albums_provider.dart';
 import 'package:prototipo_flutter_lab4/themes/default_theme.dart';
+import 'package:provider/provider.dart';
 import '../widgets/widgets.dart';
 
-class ListViewPageAlbums extends StatefulWidget {
+class ListViewPageAlbums extends StatelessWidget {
   const ListViewPageAlbums({super.key});
-
-  static int seleccionado = 1;
-
-  static final List<Map<String, String>> listaDeTracks = <Map<String, String>>[
-    {
-      'nro': '1',
-      'title': 'Music of the Spheres I',
-      'compositores':
-          'Coldplay - Max Martin - Rik Simpson-- Daniel Green - Federico Vindver - Bill Rahko'
-    },
-    {
-      'nro': '2',
-      'title': 'Higher Power',
-      'compositores': 'Coldplay - M. Martin - Federico Vindver - Denise Carite'
-    }
-  ];
-
-  @override
-  State<ListViewPageAlbums> createState() => _CustomListViewPageState();
-}
-
-class _CustomListViewPageState extends State<ListViewPageAlbums> {
-  double _opacityLevel = 0;
-
-  ScrollController _scrollController = ScrollController();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-    Future.delayed(const Duration(milliseconds: 300), () {
-      _scrollController.addListener(() {
-        //print(
-        //'pixel ${_scrollController.position.pixels} maxScrollExtent: ${_scrollController.position.maxScrollExtent}');
-      });
-
-      _opacityLevel = 1;
-      setState(() {});
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider(
+      lazy: false,
+      create: (BuildContext context) => AlbumsProvider(),
+      child: Scaffold(
         appBar: AppBar(
-          title: const Text('Canciones del album'),
+          title: const Text('Albums'),
         ),
-        drawer: const DrawerMenu(),
-        body: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: AnimatedOpacity(
-              opacity: _opacityLevel,
-              duration: const Duration(milliseconds: 500),
-              child: ListView.separated(
-                physics: const BouncingScrollPhysics(),
-                // ignore: prefer_const_literals_to_create_immutables
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    title: Text(ListViewPageAlbums.listaDeTracks[index]['title']
-                        .toString()),
-                    leading: Icon(Icons.audiotrack),
-                    trailing: Icon(Icons.arrow_forward_rounded),
-                    subtitle: Text(ListViewPageAlbums.listaDeTracks[index]
-                            ['compositores']
-                        .toString()),
-                    onTap: () {
-                      ListViewPageAlbums.seleccionado = index;
-                      Navigator.pushReplacementNamed(context, 'cardTrack');
-                    },
-                  );
-                },
-                itemCount: ListViewPageAlbums.listaDeTracks.length,
-                separatorBuilder: (_, __) {
-                  return const Divider(height: 5);
-                },
-              ),
-            )));
+        drawer: DrawerMenu(),
+        body: const Center(
+          child: ListaAlbum(),
+        ),
+      ),
+    );
+  }
+}
+
+class ListaAlbum extends StatelessWidget {
+  const ListaAlbum({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final listaAlbum = Provider.of<AlbumsProvider>(context);
+
+    if (!listaAlbum.loadData) {
+      return const Center(
+        child: SizedBox(
+          width: 60,
+          height: 60,
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
+    return ListView.separated(
+      itemCount: listaAlbum.albums.length,
+      separatorBuilder: (context, index) => const Divider(
+        height: 5,
+      ),
+      itemBuilder: (context, index) {
+        //listaAlbum.photos[index].urls.small
+        return ListTile(
+          title: Text(listaAlbum.albums[index].name,
+              style: const TextStyle(color: Colors.black)),
+          subtitle: Text(listaAlbum.albums[index].artists.toString()),
+          leading: Image(
+              image: NetworkImage(listaAlbum.albums[index].images[0].url)),
+          trailing: Icon(Icons.arrow_forward_rounded),
+        );
+      },
+    );
   }
 }

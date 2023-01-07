@@ -20,10 +20,10 @@ class DrawerMenu extends StatelessWidget {
           ),
           const Divider(height: 5),
           ListTile(
-            title: const Text('Lista de canciones'),
+            title: const Text('Albums'),
             leading: const Icon(Icons.double_arrow_outlined),
             onTap: () {
-              Navigator.pushReplacementNamed(context, 'listaTracks');
+              Navigator.pushReplacementNamed(context, 'listaAlbums');
             },
           ),
           const Divider(height: 5),
