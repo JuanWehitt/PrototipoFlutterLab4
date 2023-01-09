@@ -12,6 +12,7 @@ class AlbumsProvider extends ChangeNotifier {
   final String _idArtist = "4gzpq5DPGxSnKTe4SA8HAU";
   List<Album> albums = [];
   bool loadData = false;
+  int index_seleccionado = -1;
 
   AlbumsProvider() {
     _apiToken = MyApp().token;
@@ -28,7 +29,8 @@ class AlbumsProvider extends ChangeNotifier {
       if (albumModel.code == 200) {
         this.loadData = true;
         this.albums = [...albumModel.data.items];
-        //print(albumModel.toString());
+        this.albums.sort(
+            (a, b) => a.releaseDate.year.compareTo(b.releaseDate.year) * -1);
       } else {
         print("no hay datos revise el token");
       }

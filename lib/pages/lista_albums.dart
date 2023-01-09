@@ -25,10 +25,29 @@ class ListViewPageAlbums extends StatelessWidget {
   }
 }
 
-class ListaAlbum extends StatelessWidget {
+class ListaAlbum extends StatefulWidget {
   const ListaAlbum({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<ListaAlbum> createState() => _CustomListaAlbum();
+}
+
+class _CustomListaAlbum extends State<ListaAlbum> {
+  double _opacityLevel = 0;
+
+  ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      _scrollController.addListener(() {});
+      _opacityLevel = 1;
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,22 +63,43 @@ class ListaAlbum extends StatelessWidget {
       );
     }
 
-    return ListView.separated(
-      itemCount: listaAlbum.albums.length,
-      separatorBuilder: (context, index) => const Divider(
-        height: 5,
+    return AnimatedOpacity(
+      duration: const Duration(milliseconds: 1000),
+      opacity: _opacityLevel,
+      child: ListView.separated(
+        itemCount: listaAlbum.albums.length,
+        separatorBuilder: (context, index) => const Divider(
+          height: 5,
+        ),
+        itemBuilder: (context, index) {
+          //listaAlbum.photos[index].urls.small
+          return ListTile(
+            title: Text(listaAlbum.albums[index].name,
+                style: const TextStyle(color: Colors.black)),
+            subtitle: Text(artistas_de(index, listaAlbum) +
+                anio_de_album(index, listaAlbum)),
+            leading: Image(
+                image: NetworkImage(listaAlbum.albums[index].images[0].url)),
+            trailing: Icon(Icons.arrow_forward_rounded),
+            onTap: () {
+              listaAlbum.index_seleccionado = index;
+              Navigator.pushReplacementNamed(context, 'albumPage');
+            },
+          );
+        },
       ),
-      itemBuilder: (context, index) {
-        //listaAlbum.photos[index].urls.small
-        return ListTile(
-          title: Text(listaAlbum.albums[index].name,
-              style: const TextStyle(color: Colors.black)),
-          subtitle: Text(listaAlbum.albums[index].artists.toString()),
-          leading: Image(
-              image: NetworkImage(listaAlbum.albums[index].images[0].url)),
-          trailing: Icon(Icons.arrow_forward_rounded),
-        );
-      },
     );
+  }
+
+  String artistas_de(int index, AlbumsProvider listaAlbum) {
+    String cadena = "";
+    listaAlbum.albums[index].artists.forEach((element) {
+      cadena += " - " + element.name;
+    });
+    return cadena + " - ";
+  }
+
+  String anio_de_album(int index, AlbumsProvider listaAlbum) {
+    return listaAlbum.albums[index].releaseDate.year.toString();
   }
 }
