@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:prototipo_flutter_lab4/pages/lista_tracks.dart';
+import 'package:prototipo_flutter_lab4/pages/album_page.dart';
 import 'package:prototipo_flutter_lab4/themes/default_theme.dart';
 import 'package:provider/provider.dart';
 import '../widgets/widgets.dart';
@@ -21,9 +21,7 @@ class CardPage extends StatelessWidget {
       child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: Text(ListViewPage.listaDeTracks[ListViewPage.seleccionado]
-                    ['title']
-                .toString()),
+            title: Text("titulo"),
             elevation: 10,
             leading: InkWell(
                 child: IconButton(
@@ -41,8 +39,8 @@ class CardPage extends StatelessWidget {
                 controller: pageController,
                 scrollDirection: Axis.horizontal,
                 children: [
-                  CardTrack(nro: ListViewPage.seleccionado),
-                  NotesTrack(nro: ListViewPage.seleccionado)
+                  //CardTrack(nro: ListViewPageAlbum.seleccionado),
+                  //NotesTrack(nro: ListViewPageAlbum.seleccionado)
                 ]),
           ),
           floatingActionButton: const FavoritoActionButton(),

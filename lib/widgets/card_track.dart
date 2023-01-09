@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prototipo_flutter_lab4/model/album.dart';
-import 'package:prototipo_flutter_lab4/pages/lista_tracks.dart';
+import 'package:prototipo_flutter_lab4/pages/album_page.dart';
 
 class CardTrack extends StatelessWidget {
   final int nro;
@@ -21,13 +21,13 @@ class CardTrack extends StatelessWidget {
               ListTile(
                 leading: Icon(Icons.music_note_sharp),
                 title: Text(
-                  ListViewPage.listaDeTracks[nro]['title'].toString(),
+                  "ListViewPageAlbum.listaDeTracks[nro]['title'].toString()",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontFamily: 'FuzzyBubbles'),
                 ),
                 subtitle: Text(
-                  ListViewPage.listaDeTracks[nro]['compositores'].toString(),
+                  "ListViewPageAlbum.listaDeTracks[nro]['compositores'].toString()",
                   style: TextStyle(fontSize: 14, fontFamily: 'FuzzyBubbles'),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
