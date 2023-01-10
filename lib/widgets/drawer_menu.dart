@@ -1,5 +1,9 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
+import 'package:prototipo_flutter_lab4/providers/artist_provider.dart';
 import 'package:prototipo_flutter_lab4/themes/default_theme.dart';
+import 'package:provider/provider.dart';
 
 class DrawerMenu extends StatelessWidget {
   const DrawerMenu({super.key});
@@ -40,17 +44,29 @@ class _DrawerHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final artist = Provider.of<ArtistProvider>(context);
     return DrawerHeader(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/coldplay-1-2-logo.gif'),
-              fit: BoxFit.fill,
+              image: NetworkImage(artist.artista.images[1]
+                  .url), //AssetImage('assets/images/coldplay-1-2-logo.gif'),
+              fit: BoxFit.cover,
               opacity: 0.9)),
       child: Container(
         alignment: Alignment.bottomRight,
         child: const Text(
-          'Menu',
-          style: TextStyle(color: DefaultTheme.primary, fontSize: 19),
+          'Coldplay Menu',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 19,
+            shadows: [
+              Shadow(
+                blurRadius: 3.0,
+                color: Colors.black,
+                offset: Offset(3.0, 3.0),
+              ),
+            ],
+          ),
           textAlign: TextAlign.right,
         ),
       ),

@@ -7,47 +7,50 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:prototipo_flutter_lab4/main.dart';
 import 'package:prototipo_flutter_lab4/model/artist.dart';
+import 'package:prototipo_flutter_lab4/model/tracks_Album.dart';
+
+import '../model/track.dart';
 
 class TracksProvider extends ChangeNotifier {
   String _apiToken = dotenv.env['API_TOKEN_SPOTIFY'].toString();
   final String _baseUrl = 'localhost:3000';
-  final String _idArtist = "4gzpq5DPGxSnKTe4SA8HAU";
+  //final String _idArtist = "4gzpq5DPGxSnKTe4SA8HAU";
+  String _idAlbum = "";
   bool loadData = false;
-  ArtistData artista = ArtistData(
-      externalUrls: ExternalUrls(spotify: "spotify"),
-      followers: Followers(href: "href", total: 0),
-      genres: [],
-      href: "href",
-      id: "id",
-      images: [],
-      name: "name",
-      popularity: 0,
-      type: "type",
-      uri: "uri");
+  List<Track> tracks = [];
 
   TracksProvider() {
     _apiToken = MyApp().token;
-    this.getInfo();
+    //this.getInfo();
+  }
+
+  setIdAlbum(String idAlbum) {
+    this._idAlbum = idAlbum;
+    //loadData = false;
+    getInfo();
   }
 
   getInfo() async {
-    final url = Uri.http(_baseUrl, "/artist/$_idArtist");
+    final url = Uri.http(_baseUrl, "/albums/$_idAlbum/tracks");
+    print(url);
+
+    ///albums/:id/tracks?limit=11&offset=5
 
     try {
       final response =
           await http.get(url, headers: {'access_token': _apiToken});
-      final artist = ArtistModel.fromJson(response.body);
-      //print(response.body);
-      if (artist.code == 200) {
+      print("entro hasta aca");
+      final tracksAlbumModel = TracksAlbumModel.fromJson(response.body);
+      if (tracksAlbumModel.code == 200) {
         this.loadData = true;
-        //print(artist.data.images[0].url);
-        this.artista = artist.data;
+        //print(tracksAlbumModel.data.items.length);
+        this.tracks = [...tracksAlbumModel.data.items];
+        notifyListeners();
       } else {
         print("No hay resultados revise el token");
       }
     } catch (e) {
       print('error $e');
     }
-    notifyListeners();
   }
 }

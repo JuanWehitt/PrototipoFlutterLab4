@@ -4,6 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:prototipo_flutter_lab4/model/album.dart';
+import 'package:prototipo_flutter_lab4/providers/providers.dart';
+import 'package:provider/provider.dart';
 import '../main.dart';
 
 class AlbumsProvider extends ChangeNotifier {
@@ -12,7 +14,7 @@ class AlbumsProvider extends ChangeNotifier {
   final String _idArtist = "4gzpq5DPGxSnKTe4SA8HAU";
   List<Album> albums = [];
   bool loadData = false;
-  int index_seleccionado = -1;
+  int pointer = 0;
 
   AlbumsProvider() {
     _apiToken = MyApp().token;
@@ -20,8 +22,9 @@ class AlbumsProvider extends ChangeNotifier {
   }
 
   getInfo() async {
-    final url = Uri.http(_baseUrl, "/artist/$_idArtist/albums");
-    print(url);
+    final url = Uri.http(
+        _baseUrl, '/artist/$_idArtist/albums', {"include_groups": "album"});
+    //print(url);
     try {
       final response =
           await http.get(url, headers: {'access_token': _apiToken});

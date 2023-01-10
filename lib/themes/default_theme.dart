@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class DefaultTheme {
   static const Color primary = Color.fromARGB(255, 71, 50, 255);
-  static final Color primaryHover = Colors.cyan;
+  static const Color primaryHover = Colors.cyan;
 
   static final ThemeData defaultTheme = ThemeData.light().copyWith(
       primaryColor: Colors.blueGrey,
