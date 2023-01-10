@@ -42,7 +42,7 @@ class Data {
 }
 
 class Album {
-  List<Artist> artists;
+  List<ArtistAlbum> artists;
   ExternalUrls externalUrls;
   String href;
   String id;
@@ -66,8 +66,8 @@ class Album {
   });
 
   factory Album.fromJson(Map<String, dynamic> json) => Album(
-        artists:
-            List<Artist>.from(json["artists"].map((x) => Artist.fromJson(x))),
+        artists: List<ArtistAlbum>.from(
+            json["artists"].map((x) => ArtistAlbum.fromJson(x))),
         externalUrls: ExternalUrls.fromJson(json["external_urls"]),
         href: json["href"],
         id: json["id"],
@@ -80,14 +80,14 @@ class Album {
       );
 }
 
-class Artist {
+class ArtistAlbum {
   String name;
 
-  Artist({
+  ArtistAlbum({
     required this.name,
   });
 
-  factory Artist.fromJson(Map<String, dynamic> json) => Artist(
+  factory ArtistAlbum.fromJson(Map<String, dynamic> json) => ArtistAlbum(
         name: json["name"],
       );
 }
