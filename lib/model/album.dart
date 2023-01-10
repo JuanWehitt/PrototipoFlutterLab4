@@ -29,15 +29,24 @@ class AlbumData {
 class Data {
   String href;
   List<Album> items;
+  int total;
+  int limit;
+  int offset;
 
   Data({
     required this.href,
     required this.items,
+    required this.total,
+    required this.limit,
+    required this.offset,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         href: json["href"],
         items: List<Album>.from(json["items"].map((x) => Album.fromJson(x))),
+        total: json["total"],
+        limit: json["limit"],
+        offset: json["offset"],
       );
 }
 
@@ -74,7 +83,9 @@ class Album {
         images: List<AlbumImage>.from(
             json["images"].map((x) => AlbumImage.fromJson(x))),
         name: json["name"],
-        releaseDate: DateTime.parse(json["release_date"]),
+        releaseDate: (json["release_date"].toString().length == 4)
+            ? DateTime.parse(json["release_date"] + '-10-10')
+            : DateTime.parse(json["release_date"]),
         totalTracks: json["total_tracks"],
         uri: json["uri"],
       );

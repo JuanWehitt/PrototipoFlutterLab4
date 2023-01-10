@@ -62,6 +62,11 @@ class _CustomListaAlbum extends State<ListaAlbum> {
       );
     }
 
+    if (listaAlbum.next()) {
+      listaAlbum.loadData = false;
+      listaAlbum.siguientePagina();
+    }
+
     return AnimatedOpacity(
       duration: const Duration(milliseconds: 1000),
       opacity: _opacityLevel,
