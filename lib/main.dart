@@ -10,12 +10,22 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
 
-  runApp(MyApp());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<ArtistProvider>(
+          create: (context) => ArtistProvider()),
+      ChangeNotifierProvider<AlbumsProvider>(
+          create: (context) => AlbumsProvider()),
+      ChangeNotifierProvider<TracksProvider>(
+          create: (context) => TracksProvider()),
+    ],
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
   final String token =
-      "BQBL55GBv5gsbHVZTQBElc8bH_ge-JxRwmqCmHQWTU_xWzcSIJoFESVHObY6_2EF_-9K-xaQl2v-xSHCCFFN4qE8mM_LmyCu2DAyNOnbJXsqnjkBAfhpq-yWsRLSGfAdMRydnzZeq6hKI881c_Vn3T7OIDYyZVqIbKAm8TPPsmFIkSCyoxZVQJATVzHPHJG9QrEyFJCAV3nC8xugLPByyQ";
+      "BQA4tbJNd9v40qePZuaoahRf6HcOPRoct5WgQShkzx84kiKNrWxkQB_8Mmyn_C6lVkrjOuWxVFph0QQjhtr77N5_sr1Y4ep99zG2g39Givfs2j5ORI6HLnIMHglxH5ecSuqGml-_m8GUgaQFm2SUfDmbMSnzkbnHT37uvZ1EQqTuERULOGRuoLLqNyRZ4WrG_Yb9fwmPdSfgSPbcrxBkQA";
   const MyApp({super.key});
 
   // This widget is the root of your application.

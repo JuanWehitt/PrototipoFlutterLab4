@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:prototipo_flutter_lab4/providers/albums_provider.dart';
+import 'package:prototipo_flutter_lab4/providers/tracks_provider.dart';
 import 'package:prototipo_flutter_lab4/themes/default_theme.dart';
 import 'package:provider/provider.dart';
+import '../model/album.dart';
+import '../model/track.dart';
 import '../widgets/widgets.dart';
 
 class ListViewPageAlbums extends StatelessWidget {
@@ -9,17 +12,13 @@ class ListViewPageAlbums extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      lazy: false,
-      create: (BuildContext context) => AlbumsProvider(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Albums'),
-        ),
-        drawer: DrawerMenu(),
-        body: const Center(
-          child: ListaAlbum(),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Albums'),
+      ),
+      drawer: DrawerMenu(),
+      body: const Center(
+        child: ListaAlbum(),
       ),
     );
   }
@@ -82,7 +81,7 @@ class _CustomListaAlbum extends State<ListaAlbum> {
                 image: NetworkImage(listaAlbum.albums[index].images[0].url)),
             trailing: Icon(Icons.arrow_forward_rounded),
             onTap: () {
-              listaAlbum.index_seleccionado = index;
+              listaAlbum.pointer = index;
               Navigator.pushReplacementNamed(context, 'albumPage');
             },
           );

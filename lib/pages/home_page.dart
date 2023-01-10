@@ -11,19 +11,16 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        lazy: false,
-        create: (BuildContext context) => ArtistProvider(),
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Coldplay'),
-            centerTitle: true,
-            elevation: 10.0,
-          ),
-          drawer: const DrawerMenu(),
-          // ignore: prefer_const_constructors
-          body: BodyHome(),
-        ));
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Coldplay'),
+        centerTitle: true,
+        elevation: 10.0,
+      ),
+      drawer: const DrawerMenu(),
+      // ignore: prefer_const_constructors
+      body: BodyHome(),
+    );
   }
 }
 

@@ -46,11 +46,12 @@ class Album {
   ExternalUrls externalUrls;
   String href;
   String id;
-  List<Image> images;
+  List<AlbumImage> images;
   String name;
   DateTime releaseDate;
   int totalTracks;
   String uri;
+  bool? explicit = false;
 
   Album({
     required this.artists,
@@ -70,7 +71,8 @@ class Album {
         externalUrls: ExternalUrls.fromJson(json["external_urls"]),
         href: json["href"],
         id: json["id"],
-        images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
+        images: List<AlbumImage>.from(
+            json["images"].map((x) => AlbumImage.fromJson(x))),
         name: json["name"],
         releaseDate: DateTime.parse(json["release_date"]),
         totalTracks: json["total_tracks"],
@@ -102,17 +104,17 @@ class ExternalUrls {
       );
 }
 
-class Image {
+class AlbumImage {
   int height;
   String url;
   int width;
 
-  Image({
+  AlbumImage({
     required this.height,
     required this.url,
     required this.width,
   });
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
+  factory AlbumImage.fromJson(Map<String, dynamic> json) => AlbumImage(
         height: json["height"],
         url: json["url"],
         width: json["width"],

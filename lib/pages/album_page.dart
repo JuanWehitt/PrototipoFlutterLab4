@@ -30,7 +30,7 @@ class _CustomListViewPageState extends State<ListViewPageAlbum> {
   @override
   Widget build(BuildContext context) {
     final albumsProvider = Provider.of<AlbumsProvider>(context);
-    final int index = albumsProvider.index_seleccionado;
+    final int index = albumsProvider.pointer;
     final Album album = albumsProvider.albums[index];
 
     final tracksProvider = Provider.of<TracksProvider>(context);
@@ -83,9 +83,4 @@ class _CustomListViewPageState extends State<ListViewPageAlbum> {
               ))),
     );
   }
-
-  /*class NombreAlbum extends StatelessWidget{
-
-    
-  }*/
 }
