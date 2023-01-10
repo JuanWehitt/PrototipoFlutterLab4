@@ -32,14 +32,14 @@ class TracksProvider extends ChangeNotifier {
 
   getInfo() async {
     final url = Uri.http(_baseUrl, "/albums/$_idAlbum/tracks");
-    print(url);
+    //print(url);
 
     ///albums/:id/tracks?limit=11&offset=5
 
     try {
       final response =
           await http.get(url, headers: {'access_token': _apiToken});
-      print("entro hasta aca");
+      //print("entro hasta aca");
       final tracksAlbumModel = TracksAlbumModel.fromJson(response.body);
       if (tracksAlbumModel.code == 200) {
         this.loadData = true;

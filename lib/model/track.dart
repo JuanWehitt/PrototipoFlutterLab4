@@ -1,5 +1,5 @@
 class Track {
-  List<Artist> artists;
+  List<ArtistTrack> artists;
   bool explicit;
   ExternalUrls externalUrls;
   String href;
@@ -24,7 +24,8 @@ class Track {
   factory Track.fromJson(Map<String, dynamic> json) => Track(
         artists: json["artists"] == null
             ? []
-            : List<Artist>.from(json["artists"].map((x) => Artist.fromJson(x))),
+            : List<ArtistTrack>.from(
+                json["artists"].map((x) => ArtistTrack.fromJson(x))),
         explicit: json["explicit"],
         externalUrls: ExternalUrls.fromJson(json["external_urls"]),
         href: json["href"],
@@ -36,14 +37,14 @@ class Track {
       );
 }
 
-class Artist {
+class ArtistTrack {
   String name;
 
-  Artist({
+  ArtistTrack({
     required this.name,
   });
 
-  factory Artist.fromJson(Map<String, dynamic> json) => Artist(
+  factory ArtistTrack.fromJson(Map<String, dynamic> json) => ArtistTrack(
         name: json["name"],
       );
 }

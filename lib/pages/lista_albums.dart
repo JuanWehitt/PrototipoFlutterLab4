@@ -72,6 +72,7 @@ class _CustomListaAlbum extends State<ListaAlbum> {
         ),
         itemBuilder: (context, index) {
           //listaAlbum.photos[index].urls.small
+          listaAlbum.pointer = index;
           return ListTile(
             title: Text(listaAlbum.albums[index].name,
                 style: const TextStyle(color: Colors.black)),
