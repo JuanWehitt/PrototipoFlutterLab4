@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:prototipo_flutter_lab4/providers/albums_provider.dart';
-import 'package:prototipo_flutter_lab4/providers/tracks_provider.dart';
-import 'package:prototipo_flutter_lab4/themes/default_theme.dart';
 import 'package:provider/provider.dart';
-import '../model/album.dart';
-import '../model/track.dart';
+
 import '../widgets/widgets.dart';
 
 class ListViewPageAlbums extends StatelessWidget {
@@ -17,9 +14,7 @@ class ListViewPageAlbums extends StatelessWidget {
         title: const Text('Albums'),
       ),
       drawer: DrawerMenu(),
-      body: const Center(
-        child: ListaAlbum(),
-      ),
+      body: ListaAlbum(),
     );
   }
 }
@@ -35,14 +30,14 @@ class ListaAlbum extends StatefulWidget {
 
 class _CustomListaAlbum extends State<ListaAlbum> {
   double _opacityLevel = 0;
-
-  ScrollController _scrollController = ScrollController();
+  //double _height = 100.0;
+  //int _index = 1;
+  //ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 1000), () {
-      _scrollController.addListener(() {});
+    Future.delayed(const Duration(milliseconds: 300), () {
       _opacityLevel = 1;
       setState(() {});
     });
@@ -68,7 +63,7 @@ class _CustomListaAlbum extends State<ListaAlbum> {
     }
 
     return AnimatedOpacity(
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 500),
       opacity: _opacityLevel,
       child: ListView.separated(
         itemCount: listaAlbum.albums.length,
@@ -80,16 +75,19 @@ class _CustomListaAlbum extends State<ListaAlbum> {
           listaAlbum.pointer = index;
           return ListTile(
             title: Text(listaAlbum.albums[index].name,
-                style: const TextStyle(color: Colors.black)),
+                style: const TextStyle(color: Colors.black, fontSize: 18)),
             subtitle: Text(artistas_de(index, listaAlbum) +
                 anio_de_album(index, listaAlbum)),
             leading: Image(
-                image: NetworkImage(listaAlbum.albums[index].images[0].url)),
+                image: NetworkImage(listaAlbum.albums[index].images[0].url,
+                    scale: 0.9)),
             trailing: Icon(Icons.arrow_forward_rounded),
             onTap: () {
               listaAlbum.pointer = index;
               Navigator.pushReplacementNamed(context, 'albumPage');
             },
+            visualDensity: const VisualDensity(vertical: 3.9),
+            isThreeLine: true,
           );
         },
       ),
@@ -99,9 +97,9 @@ class _CustomListaAlbum extends State<ListaAlbum> {
   String artistas_de(int index, AlbumsProvider listaAlbum) {
     String cadena = "";
     listaAlbum.albums[index].artists.forEach((element) {
-      cadena += " - " + element.name;
+      cadena += " - ${element.name}";
     });
-    return cadena + " - ";
+    return "$cadena - ";
   }
 
   String anio_de_album(int index, AlbumsProvider listaAlbum) {

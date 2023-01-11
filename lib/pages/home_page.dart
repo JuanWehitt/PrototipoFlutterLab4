@@ -70,7 +70,7 @@ class BodyHome extends StatelessWidget {
                       color: Colors.white.withOpacity(0.7),
                       borderRadius: BorderRadius.circular(10)),
                   child: Text(
-                    " " + artist.artista.followers.total.toString() + " ",
+                    " ${artist.artista.followers.total} ",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                   ),
                 ),

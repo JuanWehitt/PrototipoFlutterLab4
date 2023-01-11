@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:prototipo_flutter_lab4/pages/album_page.dart';
 import 'package:prototipo_flutter_lab4/themes/default_theme.dart';
 import 'package:provider/provider.dart';
-import '../widgets/widgets.dart';
 
 class CardPage extends StatelessWidget {
   //final int nro;
@@ -26,7 +24,7 @@ class CardPage extends StatelessWidget {
             leading: InkWell(
                 child: IconButton(
               onPressed: () {
-                Navigator.pushReplacementNamed(context, 'listaTracks');
+                Navigator.pushReplacementNamed(context, 'albumPage');
               },
               icon: Icon(Icons.arrow_back),
             )),
