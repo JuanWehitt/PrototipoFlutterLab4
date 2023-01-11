@@ -56,60 +56,64 @@ class _CustomListViewPageState extends State<ListViewPageAlbum> {
         )),
       ),
       //drawer: const DrawerMenu(),
-      body: AnimatedOpacity(
-        opacity: _opacityLevel,
-        duration: const Duration(milliseconds: 500),
-        child: Column(
-          children: [
-            Center(
-                child: Image.network(
-              album.images[1].url,
-              width: 100,
-              height: 100,
-            )),
-            ListView.builder(
-                //scrollDirection: ,
-                //controller: _scrollController,
-                itemCount: tracksProvider.tracks.length,
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemExtent: 100,
-                // ignore: prefer_const_literals_to_create_immutables
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                      height: 90,
-                      margin: const EdgeInsets.only(bottom: 10),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 15, vertical: 10),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: const [
-                            BoxShadow(
-                                color: Colors.black12,
-                                blurRadius: 5,
-                                spreadRadius: 0,
-                                offset: Offset(0, 6))
-                          ]),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            //Image.network('https://cdn-icons-png.flaticon.com/512/147/147133.png', width: 50, height: 50,),
-                            GestureDetector(
-                              child: Image.network(
-                                  albumsProvider.albums[albumsProvider.pointer]
-                                      .images[1].url,
-                                  scale: 0.6),
-                              onTap: () {
-                                Navigator.pushReplacementNamed(
-                                    context, 'cardTrack');
-                              },
-                            )
-                          ]));
-                }),
-          ],
+      body: ListView(children: [
+        AnimatedOpacity(
+          opacity: _opacityLevel,
+          duration: const Duration(milliseconds: 500),
+          child: Column(
+            children: [
+              Center(
+                  child: Image.network(
+                album.images[1].url,
+                width: 300,
+                height: 300,
+              )),
+              ListView.builder(
+                  //scrollDirection: ,
+                  //controller: _scrollController,
+                  itemCount: tracksProvider.tracks.length,
+                  //physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemExtent: 100,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                        height: 90,
+                        margin: const EdgeInsets.only(bottom: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 15, vertical: 10),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Colors.black12,
+                                  blurRadius: 5,
+                                  spreadRadius: 0,
+                                  offset: Offset(0, 6))
+                            ]),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              //Image.network('https://cdn-icons-png.flaticon.com/512/147/147133.png', width: 50, height: 50,),
+                              GestureDetector(
+                                child: Image.network(
+                                    albumsProvider
+                                        .albums[albumsProvider.pointer]
+                                        .images[1]
+                                        .url,
+                                    scale: 0.6),
+                                onTap: () {
+                                  Navigator.pushReplacementNamed(
+                                      context, 'cardTrack');
+                                },
+                              )
+                            ]));
+                  }),
+            ],
+          ),
         ),
-      ),
+      ]),
     );
   }
 }
