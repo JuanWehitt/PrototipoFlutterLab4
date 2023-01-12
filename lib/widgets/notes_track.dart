@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:prototipo_flutter_lab4/model/album.dart';
+import 'package:prototipo_flutter_lab4/model/albums_Artist.dart';
 import 'package:prototipo_flutter_lab4/pages/album_page.dart';
 
 class NotesTrack extends StatelessWidget {

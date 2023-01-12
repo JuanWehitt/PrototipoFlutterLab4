@@ -1,57 +1,7 @@
-// To parse this JSON data, do
-//
-//     final album = albumFromJson(jsonString);
-
-import 'dart:convert';
-
-class AlbumModel {
-  static AlbumData fromJson(String str) => AlbumData.fromJson(json.decode(str));
-}
-
-class AlbumData {
-  int code;
-  String status;
-  Data data;
-
-  AlbumData({
-    required this.code,
-    required this.status,
-    required this.data,
-  });
-
-  factory AlbumData.fromJson(Map<String, dynamic> json) => AlbumData(
-        code: json["code"],
-        status: json["status"],
-        data: Data.fromJson(json["data"]),
-      );
-}
-
-class Data {
-  String href;
-  List<Album> items;
-  int total;
-  int limit;
-  int offset;
-
-  Data({
-    required this.href,
-    required this.items,
-    required this.total,
-    required this.limit,
-    required this.offset,
-  });
-
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        href: json["href"],
-        items: List<Album>.from(json["items"].map((x) => Album.fromJson(x))),
-        total: json["total"],
-        limit: json["limit"],
-        offset: json["offset"],
-      );
-}
+import 'artists.dart';
 
 class Album {
-  List<ArtistAlbum> artists;
+  List<Artists> artists;
   ExternalUrls externalUrls;
   String href;
   String id;
@@ -75,8 +25,8 @@ class Album {
   });
 
   factory Album.fromJson(Map<String, dynamic> json) => Album(
-        artists: List<ArtistAlbum>.from(
-            json["artists"].map((x) => ArtistAlbum.fromJson(x))),
+        artists:
+            List<Artists>.from(json["artists"].map((x) => Artists.fromJson(x))),
         externalUrls: ExternalUrls.fromJson(json["external_urls"]),
         href: json["href"],
         id: json["id"],
@@ -88,18 +38,6 @@ class Album {
             : DateTime.parse(json["release_date"]),
         totalTracks: json["total_tracks"],
         uri: json["uri"],
-      );
-}
-
-class ArtistAlbum {
-  String name;
-
-  ArtistAlbum({
-    required this.name,
-  });
-
-  factory ArtistAlbum.fromJson(Map<String, dynamic> json) => ArtistAlbum(
-        name: json["name"],
       );
 }
 

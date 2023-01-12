@@ -24,7 +24,7 @@ class TracksProvider extends ChangeNotifier {
     //this.getInfo();
   }
 
-  setIdAlbum(String idAlbum) {
+  setAndLoadTracksAlbum(String idAlbum) {
     this._idAlbum = idAlbum;
     //loadData = false;
     getInfo();

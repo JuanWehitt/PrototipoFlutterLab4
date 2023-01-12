@@ -3,10 +3,9 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
-import 'package:prototipo_flutter_lab4/model/album.dart';
-import 'package:prototipo_flutter_lab4/providers/providers.dart';
-import 'package:provider/provider.dart';
+import 'package:prototipo_flutter_lab4/model/albums_Artist.dart';
 import '../main.dart';
+import '../model/album.dart';
 
 class AlbumsProvider extends ChangeNotifier {
   String _apiToken = dotenv.env['API_TOKEN_SPOTIFY'].toString();

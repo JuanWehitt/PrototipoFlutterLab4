@@ -1,5 +1,7 @@
+import 'artists.dart';
+
 class Track {
-  List<ArtistTrack> artists;
+  List<Artists> artists;
   bool explicit;
   ExternalUrls externalUrls;
   String href;
@@ -24,8 +26,8 @@ class Track {
   factory Track.fromJson(Map<String, dynamic> json) => Track(
         artists: json["artists"] == null
             ? []
-            : List<ArtistTrack>.from(
-                json["artists"].map((x) => ArtistTrack.fromJson(x))),
+            : List<Artists>.from(
+                json["artists"].map((x) => Artists.fromJson(x))),
         explicit: json["explicit"],
         externalUrls: ExternalUrls.fromJson(json["external_urls"]),
         href: json["href"],
@@ -34,18 +36,6 @@ class Track {
         previewUrl: json["preview_url"],
         trackNumber: json["track_number"],
         uri: json["uri"],
-      );
-}
-
-class ArtistTrack {
-  String name;
-
-  ArtistTrack({
-    required this.name,
-  });
-
-  factory ArtistTrack.fromJson(Map<String, dynamic> json) => ArtistTrack(
-        name: json["name"],
       );
 }
 
