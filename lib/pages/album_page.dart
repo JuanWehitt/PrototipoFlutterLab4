@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:prototipo_flutter_lab4/model/albums_Artist.dart';
 import 'package:prototipo_flutter_lab4/model/artists.dart';
 import 'package:prototipo_flutter_lab4/model/track.dart';
+import 'package:prototipo_flutter_lab4/themes/default_theme.dart';
 import 'package:provider/provider.dart';
 import '../model/album.dart';
 import '../providers/providers.dart';
@@ -79,38 +80,40 @@ class _CustomListViewPageState extends State<ListViewPageAlbum> {
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
                 child: Container(
                   alignment: Alignment.center,
-                  width: size.width,
-                  height: 40,
+                  width: size.width * 0.99,
+                  //height: 40,
                   decoration: BoxDecoration(
                     color: Colors.blueGrey,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Column(
-                    children: [
-                      Text(
-                          '${compositores(album.artists)}${anio_de_album(album)} -'),
-                      Text(
-                          '- ${cantidad_de_canciones(album.totalTracks)} - ${explicito(tracksProvider)}'),
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                            '${compositores(album.artists)}${anio_de_album(album)} -'),
+                        Text(
+                            '- ${cantidad_de_canciones(album.totalTracks)} - ${explicito(tracksProvider)}'),
+                      ],
+                    ),
                   ),
                 ),
               ),
               ListView.builder(
-                  //scrollDirection: ,
-                  //controller: _scrollController,
                   itemCount: tracksProvider.tracks.length,
                   //physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemExtent: 100,
-                  // ignore: prefer_const_literals_to_create_immutables
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
-                        height: 90,
+                        //height: 80,
                         margin: const EdgeInsets.only(bottom: 10),
                         padding: const EdgeInsets.symmetric(
                             horizontal: 15, vertical: 10),
                         decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: Color.fromARGB(255, 180, 201, 230),
                             borderRadius: BorderRadius.circular(15),
                             boxShadow: const [
                               BoxShadow(
@@ -119,20 +122,26 @@ class _CustomListViewPageState extends State<ListViewPageAlbum> {
                                   spreadRadius: 0,
                                   offset: Offset(0, 6))
                             ]),
-                        child: Row(
+                        child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               //Image.network('https://cdn-icons-png.flaticon.com/512/147/147133.png', width: 50, height: 50,),
                               GestureDetector(
-                                child: Image.network(
-                                    albumsProvider
-                                        .albums[albumsProvider.pointer]
-                                        .images[1]
-                                        .url,
-                                    scale: 0.6),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Icon(Icons.music_note,
+                                        size: 40, color: DefaultTheme.primary),
+                                    Text(tracksProvider.tracks[index].name),
+                                    Icon(Icons.arrow_forward_sharp)
+                                  ],
+                                ),
                                 onTap: () {
+                                  tracksProvider.pointer = index;
                                   Navigator.pushReplacementNamed(
-                                      context, 'cardTrack');
+                                      context, 'trackPage');
                                 },
                               )
                             ]));
