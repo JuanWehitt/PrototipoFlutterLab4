@@ -25,7 +25,7 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   final String token =
-      "BQBDtPbEbaJMCRoQyu77avIDEA6kYBiO_Rkf7DplSDGvh4CS_rYbOPNb5z-OdFCAICImBkqZd0pUnncjI4Nuj6GFyU8qSXKCkJy_E3Mzu8XSQxZlHYW3vjbiW5eg4IDM08l2j58_3r31GCT31BmvPJAcohV8rvfBTpLmO5RS7oHIuwv5Z1gE88KP18J0870cVgi12dnmZUpTCdG5kpILKQ";
+      "BQBSyhAt0Hx2-LH2LUlfq2GU6hVN1d0bE7Q-4y74agnUpJaueOtbBZjw4d-wRNwxln9Cku-6dmkJMkGE_vmEqxAGJGWS1xgM4-9cL9wdCjQ53Gg3WlyuNJ0tGDBaF4i1Vyy7CtMdM1D6LQMYiNGkh3vx2hKnri6k0AGoR-9azHS31x6KtF9nXO-HxIj24oDmgO8";
   const MyApp({super.key});
 
   // This widget is the root of your application.
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           'home': (context) => const HomePage(),
           'listaAlbums': (context) => const ListViewPageAlbums(),
           'albumPage': (context) => const ListViewPageAlbum(),
-          'cardTrack': (context) => CardPage(),
+          'trackPage': (context) => CardPage(),
         });
   }
 }

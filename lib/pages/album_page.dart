@@ -101,19 +101,19 @@ class _CustomListViewPageState extends State<ListViewPageAlbum> {
                 ),
               ),
               ListView.builder(
-                  itemCount: tracksProvider.tracks.length,
-                  //physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                  itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                        //height: 80,
+                itemCount: tracksProvider.tracks.length,
+                //physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                //padding:
+                //const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                itemBuilder: (BuildContext context, int index) {
+                  return Column(
+                    children: [
+                      Container(
+                        width: size.width * 0.95,
                         margin: const EdgeInsets.only(bottom: 10),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 15, vertical: 10),
                         decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 180, 201, 230),
+                            color: Color.fromARGB(255, 156, 164, 175),
                             borderRadius: BorderRadius.circular(15),
                             boxShadow: const [
                               BoxShadow(
@@ -122,30 +122,33 @@ class _CustomListViewPageState extends State<ListViewPageAlbum> {
                                   spreadRadius: 0,
                                   offset: Offset(0, 6))
                             ]),
-                        child: Column(
+                        child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              //Image.network('https://cdn-icons-png.flaticon.com/512/147/147133.png', width: 50, height: 50,),
-                              GestureDetector(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Icon(Icons.music_note,
-                                        size: 40, color: DefaultTheme.primary),
-                                    Text(tracksProvider.tracks[index].name),
-                                    Icon(Icons.arrow_forward_sharp)
-                                  ],
-                                ),
-                                onTap: () {
-                                  tracksProvider.pointer = index;
-                                  Navigator.pushReplacementNamed(
-                                      context, 'trackPage');
-                                },
+                              Row(
+                                children: [
+                                  Icon(Icons.music_note,
+                                      size: 40, color: DefaultTheme.primary),
+                                  Text(tracksProvider.tracks[index].name),
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: GestureDetector(
+                                    onTap: () {
+                                      tracksProvider.pointer = index;
+                                      Navigator.pushReplacementNamed(
+                                          context, 'trackPage');
+                                    },
+                                    child: Icon(Icons.arrow_forward_sharp)),
                               )
-                            ]));
-                  }),
+                            ]),
+                      )
+                    ],
+                  );
+                },
+              )
             ],
           ),
         ),

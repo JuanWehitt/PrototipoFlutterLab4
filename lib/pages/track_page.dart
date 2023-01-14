@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:prototipo_flutter_lab4/themes/default_theme.dart';
 import 'package:provider/provider.dart';
 
+import '../model/album.dart';
+import '../providers/providers.dart';
+import '../widgets/widgets.dart';
+
 class CardPage extends StatelessWidget {
   //final int nro;
 
@@ -14,12 +18,20 @@ class CardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
+    final albumsProvider = Provider.of<AlbumsProvider>(context);
+    final int index = albumsProvider.pointer;
+    final Album album = albumsProvider.albums[index];
+
+    final tracksProvider = Provider.of<TracksProvider>(context);
+
     return ChangeNotifierProvider(
       create: (context) => _handlerPage(),
       child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: Text("titulo"),
+            title: Text(tracksProvider.tracks[tracksProvider.pointer].name),
             elevation: 10,
             leading: InkWell(
                 child: IconButton(
@@ -37,8 +49,8 @@ class CardPage extends StatelessWidget {
                 controller: pageController,
                 scrollDirection: Axis.horizontal,
                 children: [
-                  //CardTrack(nro: ListViewPageAlbum.seleccionado),
-                  //NotesTrack(nro: ListViewPageAlbum.seleccionado)
+                  CardTrack(nro: albumsProvider.pointer),
+                  NotesTrack(nro: tracksProvider.pointer)
                 ]),
           ),
           floatingActionButton: const FavoritoActionButton(),

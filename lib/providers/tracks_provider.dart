@@ -1,12 +1,9 @@
 // ignore_for_file: avoid_print
-
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:prototipo_flutter_lab4/main.dart';
-import 'package:prototipo_flutter_lab4/model/artist.dart';
+
 import 'package:prototipo_flutter_lab4/model/tracks_Album.dart';
 
 import '../model/track.dart';
@@ -18,6 +15,7 @@ class TracksProvider extends ChangeNotifier {
   String _idAlbum = "";
   bool loadData = false;
   List<Track> tracks = [];
+  int pointer = 0;
 
   TracksProvider() {
     _apiToken = MyApp().token;

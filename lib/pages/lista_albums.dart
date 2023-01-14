@@ -81,7 +81,12 @@ class _CustomListaAlbum extends State<ListaAlbum> {
             leading: Image(
                 image: NetworkImage(listaAlbum.albums[index].images[0].url,
                     scale: 0.9)),
-            trailing: Icon(Icons.arrow_forward_rounded),
+            trailing: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.arrow_forward_rounded),
+              ],
+            ),
             onTap: () {
               listaAlbum.pointer = index;
               Navigator.pushReplacementNamed(context, 'albumPage');
