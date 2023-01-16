@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:prototipo_flutter_lab4/providers/providers.dart';
 import 'package:provider/provider.dart';
-
+import 'package:url_launcher/url_launcher.dart';
+import '../model/track.dart';
 import '../pages/album_page.dart';
 
 class CardTrack extends StatelessWidget {
@@ -72,6 +73,22 @@ class CardTrack extends StatelessWidget {
                   textAlign: TextAlign.left,
                 ),
               ),
+              ListTile(
+                leading: Icon(Icons.numbers),
+                title: Text(
+                  duration_track(tracksProvider
+                      .tracks[tracksProvider.pointer].duration_ms),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(fontFamily: 'FuzzyBubbles'),
+                ),
+                subtitle: const Text(
+                  "Duración",
+                  style: TextStyle(fontSize: 14, fontFamily: 'FuzzyBubbles'),
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.left,
+                ),
+              ),
               Padding(
                   padding: const EdgeInsets.only(top: 12.0, bottom: 12),
                   child: Text(
@@ -86,7 +103,21 @@ class CardTrack extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(top: 8.0),
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            //https://open.spotify.com/track/2HQAeoYBn8H72Jo6UyKt6G
+                            //print(tracksProvider.tracks[tracksProvider.pointer].externalUrls.spotify);
+                            Track track =
+                                tracksProvider.tracks[tracksProvider.pointer];
+                            Uri url = Uri(
+                              scheme: 'https',
+                              host: 'open.spotify.com',
+                              path: '/track/' +
+                                  track.externalUrls.spotify.substring(
+                                      31, track.externalUrls.spotify.length),
+                            );
+                            launchUrl(url);
+                            //print(url);
+                          },
                           child: Column(
                             children: [
                               Stack(
@@ -120,7 +151,24 @@ class CardTrack extends StatelessWidget {
                       child: Column(
                         children: [
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              //"https://p.scdn.co/mp3-preview/297bfe9fea9c2585f2e85c17e8ff22c72e4b2a27?cid=774b29d4f13844c495f206cafdad9c86"
+                              //print(tracksProvider.tracks[tracksProvider.pointer].previewUrl);
+                              Track track =
+                                  tracksProvider.tracks[tracksProvider.pointer];
+                              Uri url = Uri(
+                                  scheme: 'https',
+                                  host: 'p.scdn.co',
+                                  path: track.previewUrl.substring(
+                                      18, track.previewUrl.indexOf('?')),
+                                  queryParameters: {
+                                    'cid': track.previewUrl.substring(
+                                        track.previewUrl.indexOf('=') + 1,
+                                        track.previewUrl.length)
+                                  });
+                              launchUrl(url);
+                              //print(url);
+                            },
                             icon:
                                 const Icon(Icons.play_circle_outline_outlined),
                             iconSize: 50,
@@ -138,4 +186,8 @@ class CardTrack extends StatelessWidget {
       ),
     );
   }
+}
+
+String duration_track(int dur) {
+  return dur.toString();
 }
