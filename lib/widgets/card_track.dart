@@ -1,19 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:prototipo_flutter_lab4/providers/preview_provider.dart';
 import 'package:prototipo_flutter_lab4/providers/providers.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../model/track.dart';
 import '../pages/album_page.dart';
+import 'package:just_audio/just_audio.dart';
 
-class CardTrack extends StatelessWidget {
-  final int nro;
+class CardTrack extends StatefulWidget {
+  const CardTrack({super.key});
+  @override
+  _MyAppState createState() => _MyAppState();
+}
 
-  const CardTrack({required this.nro, super.key});
+class _MyAppState extends State<CardTrack> {
+  late AudioPlayer player;
+  @override
+  void initState() {
+    super.initState();
+    player = AudioPlayer();
+  }
+
+  @override
+  void dispose() {
+    player.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final controlPreview = Provider.of<PreviewProvider>(context);
     final tracksProvider = Provider.of<TracksProvider>(context);
-    final albumProvider = Provider.of<AlbumsProvider>(context);
+    //final albumProvider = Provider.of<AlbumsProvider>(context);
+    final url = tracksProvider.tracks[tracksProvider.pointer].previewUrl;
+    //await player.setUrl(url);
 
     return SizedBox(
       width: double.infinity,
@@ -151,26 +171,20 @@ class CardTrack extends StatelessWidget {
                       child: Column(
                         children: [
                           IconButton(
-                            onPressed: () {
-                              //"https://p.scdn.co/mp3-preview/297bfe9fea9c2585f2e85c17e8ff22c72e4b2a27?cid=774b29d4f13844c495f206cafdad9c86"
-                              //print(tracksProvider.tracks[tracksProvider.pointer].previewUrl);
-                              Track track =
-                                  tracksProvider.tracks[tracksProvider.pointer];
-                              Uri url = Uri(
-                                  scheme: 'https',
-                                  host: 'p.scdn.co',
-                                  path: track.previewUrl.substring(
-                                      18, track.previewUrl.indexOf('?')),
-                                  queryParameters: {
-                                    'cid': track.previewUrl.substring(
-                                        track.previewUrl.indexOf('=') + 1,
-                                        track.previewUrl.length)
-                                  });
-                              launchUrl(url);
-                              //print(url);
+                            onPressed: () async {
+                              final url = tracksProvider
+                                  .tracks[tracksProvider.pointer].previewUrl;
+                              await player.setUrl(url);
+                              player.playing ? player.pause() : player.play();
+                              player.playing
+                                  ? controlPreview.play()
+                                  : controlPreview.pause();
                             },
-                            icon:
-                                const Icon(Icons.play_circle_outline_outlined),
+                            icon: controlPreview.playing
+                                ? const Icon(
+                                    Icons.pause_circle_outline_outlined)
+                                : const Icon(
+                                    Icons.play_circle_outline_outlined),
                             iconSize: 50,
                           ),
                           Text("Play Preview")
@@ -189,5 +203,11 @@ class CardTrack extends StatelessWidget {
 }
 
 String duration_track(int dur) {
-  return dur.toString();
+  double dur_m_d = (dur / 1000) / 60;
+  String dur_m = "";
+  dur_m_d.toInt() < 10
+      ? dur_m = "0${dur_m_d.toInt()}"
+      : dur_m_d.toInt().toString();
+  String dur_s = dur_m_d.toStringAsFixed(2).substring(2, 4);
+  return '$dur_m:$dur_s';
 }

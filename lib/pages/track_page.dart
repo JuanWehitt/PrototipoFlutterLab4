@@ -26,6 +26,16 @@ class CardPage extends StatelessWidget {
 
     final tracksProvider = Provider.of<TracksProvider>(context);
 
+    if (!tracksProvider.loadData) {
+      return const Center(
+        child: SizedBox(
+          width: 60,
+          height: 60,
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return ChangeNotifierProvider(
       create: (context) => _handlerPage(),
       child: Scaffold(
@@ -49,7 +59,7 @@ class CardPage extends StatelessWidget {
                 controller: pageController,
                 scrollDirection: Axis.horizontal,
                 children: [
-                  CardTrack(nro: albumsProvider.pointer),
+                  CardTrack(),
                   NotesTrack(nro: tracksProvider.pointer)
                 ]),
           ),

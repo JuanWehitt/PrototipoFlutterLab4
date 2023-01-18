@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:prototipo_flutter_lab4/pages/track_page.dart';
 import 'package:prototipo_flutter_lab4/pages/pages.dart';
+import 'package:prototipo_flutter_lab4/providers/preview_provider.dart';
 import 'package:prototipo_flutter_lab4/providers/providers.dart';
 import 'package:prototipo_flutter_lab4/themes/default_theme.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,8 @@ Future<void> main() async {
           create: (context) => AlbumsProvider()),
       ChangeNotifierProvider<TracksProvider>(
           create: (context) => TracksProvider()),
+      ChangeNotifierProvider<PreviewProvider>(
+          create: (context) => PreviewProvider()),
     ],
     child: const MyApp(),
   ));
@@ -25,7 +28,7 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   final String token =
-      "BQB150BcWGmxGsw310_I3Uja2X6b-xuOG3bFh1zbHBhgvi7UlNIFavPCsxE11RZ2oXqIAz932-aoLIzFIlZaqhfti-hPeEZls6IWOYzQ833oOpBaBGadxCh3u0LUhyGJnnIwxhlsnWrkFvNK0WydrpjzwJYR_yTl8GCTp8wGDFrK2yyaP5uLTyEaWzeIlOxHraFihv_SMjLzkd6izTbkdQ";
+      "BQCS6WuJbMDNsBujQq4OHF0HIO3QlFvyxR0RNQZnxd8vOjSi9A4Hn8C6FcgRHywW-gTnXUsTbi1z3H5F5Wrkrt9B67280mLbdjIWl-_2XY2OYMwMeI74TcmR3EN4Mk-QXd-NTTn6siGjxNfkUrKJu5JBCsm87rctXZE0E0L_jBtccaV0rM5YLb10ufarA7QOyzTCmXiew8UQHOPTiQA2xw";
   const MyApp({super.key});
 
   // This widget is the root of your application.
