@@ -76,15 +76,15 @@ class _CustomListaAlbum extends State<ListaAlbum> {
           return ListTile(
             title: Text(listaAlbum.albums[index].name,
                 style: const TextStyle(color: Colors.black, fontSize: 18)),
-            subtitle: Text(artistas_de(index, listaAlbum) +
-                anio_de_album(index, listaAlbum)),
+            subtitle: Text(
+                '${artistas_de(index, listaAlbum)}${anio_de_album(index, listaAlbum)} - ${listaAlbum.albums[index].totalTracks} tracks'),
             leading: Image(
                 image: NetworkImage(listaAlbum.albums[index].images[0].url,
                     scale: 0.9)),
             trailing: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.arrow_forward_rounded),
+                const Icon(Icons.arrow_forward_rounded),
               ],
             ),
             onTap: () {

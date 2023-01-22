@@ -37,7 +37,18 @@ class CardPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(tracksProvider.tracks[tracksProvider.pointer].name),
+          title: Column(
+            children: [
+              Text(tracksProvider.tracks[tracksProvider.pointer].name),
+              Padding(
+                padding: const EdgeInsets.only(top: 2.0),
+                child: Text(
+                  'del album ${albumsProvider.albums[albumsProvider.pointer].name}',
+                  style: TextStyle(fontSize: 12),
+                ),
+              ),
+            ],
+          ),
           elevation: 10,
           leading: InkWell(
               child: IconButton(

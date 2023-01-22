@@ -94,7 +94,7 @@ class _MyAppState extends State<CardTrack> {
                 ),
               ),
               ListTile(
-                leading: Icon(Icons.numbers),
+                leading: Icon(Icons.watch_later_outlined),
                 title: Text(
                   duration_track(tracksProvider
                       .tracks[tracksProvider.pointer].duration_ms),
@@ -190,6 +190,17 @@ class _MyAppState extends State<CardTrack> {
                       ),
                     ),
                   ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 30.0),
+                child: Container(
+                  child: Image.asset(
+                    "images/sound.gif",
+                    width: 40,
+                    height: 40,
+                    scale: controlPreview.playing ? 0.2 : 0.0,
+                  ),
                 ),
               )
             ],
