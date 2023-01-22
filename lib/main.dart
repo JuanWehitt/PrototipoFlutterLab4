@@ -21,6 +21,10 @@ Future<void> main() async {
           create: (context) => TracksProvider()),
       ChangeNotifierProvider<PreviewProvider>(
           create: (context) => PreviewProvider()),
+      ChangeNotifierProvider<FavoriteProvider>(
+          create: (context) => FavoriteProvider()),
+      ChangeNotifierProvider<TrackPageProvider>(
+          create: (context) => TrackPageProvider()),
     ],
     child: const MyApp(),
   ));
@@ -28,7 +32,7 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   final String token =
-      "BQCS6WuJbMDNsBujQq4OHF0HIO3QlFvyxR0RNQZnxd8vOjSi9A4Hn8C6FcgRHywW-gTnXUsTbi1z3H5F5Wrkrt9B67280mLbdjIWl-_2XY2OYMwMeI74TcmR3EN4Mk-QXd-NTTn6siGjxNfkUrKJu5JBCsm87rctXZE0E0L_jBtccaV0rM5YLb10ufarA7QOyzTCmXiew8UQHOPTiQA2xw";
+      "BQD8dy9qLaYCHS6lJRSLUo3IQm7SetwT5BOs90DDxyJYlUVSa0w3huva24IuTOQXhZBAC3R9dg3XFPSOOp5e5Rbsz4ntifA2Wr0MCOHMqIjOzbq8FEX7kXJmyMve7W7wdQOngJvaXzM4Y1swDhvwAc9fcXANEbTetadR8TfYohZcYmY38_4ZZkYTXvc2IwGure6eeNAKR-h1OWV_BmH9YA";
   const MyApp({super.key});
 
   // This widget is the root of your application.

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:prototipo_flutter_lab4/model/albums_Artist.dart';
-import 'package:prototipo_flutter_lab4/pages/album_page.dart';
+import 'package:prototipo_flutter_lab4/providers/providers.dart';
+import 'package:provider/provider.dart';
 
 class NotesTrack extends StatelessWidget {
-  final int nro;
-
-  const NotesTrack({required this.nro, super.key});
+  const NotesTrack({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final trackProvider = Provider.of<TracksProvider>(context);
+    final track = trackProvider.tracks[trackProvider.pointer];
     return Container(
       width: double.infinity,
       child: Padding(
@@ -18,33 +18,61 @@ class NotesTrack extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ListTile(
-                leading: Icon(Icons.music_note_sharp),
-                title: Text(
-                  "ListViewPageAlbum.listaDeTracks[nro]['title'].toString()",
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontFamily: 'FuzzyBubbles'),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text("Mis notas",
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontFamily: 'PaytoneOne',
+                        fontWeight: FontWeight.w300,
+                        color: Color.fromARGB(255, 5, 0, 71),
+                        shadows: [
+                          Shadow(
+                            blurRadius: 3.0,
+                            color: Colors.black,
+                            offset: Offset(1.0, 1.0),
+                          ),
+                        ],
+                      )),
                 ),
-                subtitle: Text(
-                  "ListViewPageAlbum.listaDeTracks[nro]['compositores'].toString()",
-                  style: TextStyle(fontSize: 14, fontFamily: 'FuzzyBubbles'),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.left,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  minLines: 14,
+                  maxLines: 20,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10.0))),
+                  ),
                 ),
-                minVerticalPadding: 15,
-                minLeadingWidth: 30,
               ),
-              // ignore: prefer_const_constructors
-              FadeInImage(
-                placeholder: AssetImage('assets/images/loading.gif'),
-                image: AssetImage("assets/images/coldplay-1-2-logo.gif"),
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: 450,
-                fadeInDuration: const Duration(milliseconds: 600),
-              ),
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: Stack(children: <Widget>[
+                    Positioned.fill(
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: <Color>[
+                              Color(0xFF0D47A1),
+                              Color(0xFF1976D2),
+                              Color(0xFF42A5F5),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.all(16.0),
+                          textStyle: const TextStyle(fontSize: 20),
+                        ),
+                        onPressed: () {},
+                        child: Text("Guardar")),
+                  ]))
             ],
           ),
         ),

@@ -11,10 +11,8 @@ class CardPage extends StatelessWidget {
 
   CardPage({super.key});
 
-  final PageController pageController = PageController(
-    initialPage: 0,
-    //viewportFraction:0.5
-  );
+  final PageController pageController =
+      PageController(initialPage: 0, viewportFraction: 0.99);
 
   @override
   Widget build(BuildContext context) {
@@ -36,50 +34,48 @@ class CardPage extends StatelessWidget {
       );
     }
 
-    return ChangeNotifierProvider(
-      create: (context) => _handlerPage(),
-      child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text(tracksProvider.tracks[tracksProvider.pointer].name),
-            elevation: 10,
-            leading: InkWell(
-                child: IconButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, 'albumPage');
-              },
-              icon: Icon(Icons.arrow_back),
-            )),
-            automaticallyImplyLeading: false,
-          ),
-          // ignore: prefer_const_constructors
-          body: SizedBox(
-            width: double.infinity,
-            child: PageView(
-                controller: pageController,
-                scrollDirection: Axis.horizontal,
-                children: [
-                  CardTrack(),
-                  NotesTrack(nro: tracksProvider.pointer)
-                ]),
-          ),
-          floatingActionButton: const FavoritoActionButton(),
-          bottomNavigationBar: ControlNavigation()),
-    );
+    return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(tracksProvider.tracks[tracksProvider.pointer].name),
+          elevation: 10,
+          leading: InkWell(
+              child: IconButton(
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, 'albumPage');
+            },
+            icon: Icon(Icons.arrow_back),
+          )),
+          automaticallyImplyLeading: false,
+        ),
+        // ignore: prefer_const_constructors
+        body: SizedBox(
+          width: double.infinity,
+          child: PageView(
+              controller: pageController,
+              scrollDirection: Axis.horizontal,
+              children: [CardTrack(), NotesTrack()]),
+        ),
+        floatingActionButton: const FavoritoActionButton(),
+        bottomNavigationBar: ControlNavigation(pageController));
   }
 }
 
 class ControlNavigation extends StatelessWidget {
-  ControlNavigation({super.key});
+  PageController pageController = PageController();
+  ControlNavigation(this.pageController, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    final botonera = Provider.of<_handlerPage>(context);
-
+    //final botonera = Provider.of<TrackPageProvider>(context);
+    final trackPageProvider = Provider.of<TrackPageProvider>(context);
     return BottomNavigationBar(
-        currentIndex: botonera.botonActual,
+        currentIndex: trackPageProvider.botonActual,
         onTap: (value) {
-          botonera.botonActual = value;
+          trackPageProvider.botonActual = value;
+          pageController.animateToPage(trackPageProvider.botonActual,
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeIn);
         },
         selectedLabelStyle: DefaultTheme
             .defaultTheme.bottomNavigationBarTheme.selectedLabelStyle,
@@ -103,7 +99,7 @@ class FavoritoActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final iconoMeGusta = Provider.of<_handlerPage>(context);
+    final iconoMeGusta = Provider.of<FavoriteProvider>(context);
 
     return FloatingActionButton(
       onPressed: () => iconoMeGusta.toggle(),
@@ -115,30 +111,5 @@ class FavoritoActionButton extends StatelessWidget {
               .defaultTheme.floatingActionButtonTheme.foregroundColor),
       child: const Icon(Icons.favorite),
     );
-  }
-}
-
-class _handlerPage extends ChangeNotifier {
-  bool _meGusta = false;
-  int _botonActual = 0;
-
-  bool get meGusta => _meGusta;
-
-  set meGusta(bool value) {
-    _meGusta = value;
-    notifyListeners();
-  }
-
-  void toggle() {
-    _meGusta = !_meGusta;
-    //print(_meGusta);
-    notifyListeners();
-  }
-
-  int get botonActual => _botonActual;
-
-  set botonActual(int value) {
-    _botonActual = value;
-    notifyListeners();
   }
 }

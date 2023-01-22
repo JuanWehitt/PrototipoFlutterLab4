@@ -124,8 +124,6 @@ class _MyAppState extends State<CardTrack> {
                         padding: const EdgeInsets.only(top: 8.0),
                         child: GestureDetector(
                           onTap: () {
-                            //https://open.spotify.com/track/2HQAeoYBn8H72Jo6UyKt6G
-                            //print(tracksProvider.tracks[tracksProvider.pointer].externalUrls.spotify);
                             Track track =
                                 tracksProvider.tracks[tracksProvider.pointer];
                             Uri url = Uri(
@@ -207,7 +205,8 @@ String duration_track(int dur) {
   String dur_m = "";
   dur_m_d.toInt() < 10
       ? dur_m = "0${dur_m_d.toInt()}"
-      : dur_m_d.toInt().toString();
-  String dur_s = dur_m_d.toStringAsFixed(2).substring(2, 4);
+      : dur_m = dur_m_d.toInt().toString();
+  String dur_m_s = dur_m_d.toStringAsFixed(2);
+  String dur_s = dur_m_s.substring(dur_m_s.indexOf(".") + 1, dur_m_s.length);
   return '$dur_m:$dur_s';
 }
