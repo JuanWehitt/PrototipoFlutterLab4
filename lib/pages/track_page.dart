@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:prototipo_flutter_lab4/themes/default_theme.dart';
 import 'package:provider/provider.dart';
 
+import '../Shared_data/data.dart';
 import '../model/album.dart';
+import '../model/track.dart';
 import '../providers/providers.dart';
 import '../widgets/widgets.dart';
 
@@ -16,12 +18,8 @@ class CardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
     final albumsProvider = Provider.of<AlbumsProvider>(context);
-    final int index = albumsProvider.pointer;
-    final Album album = albumsProvider.albums[index];
-
+    final trackPreview = Provider.of<PreviewProvider>(context);
     final tracksProvider = Provider.of<TracksProvider>(context);
 
     if (!tracksProvider.loadData) {
@@ -53,6 +51,7 @@ class CardPage extends StatelessWidget {
           leading: InkWell(
               child: IconButton(
             onPressed: () {
+              trackPreview.pause();
               Navigator.pushReplacementNamed(context, 'albumPage');
             },
             icon: Icon(Icons.arrow_back),
@@ -111,15 +110,26 @@ class FavoritoActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final iconoMeGusta = Provider.of<FavoriteProvider>(context);
-
+    final tracksProvider = Provider.of<TracksProvider>(context);
+    final Track track = tracksProvider.tracks[tracksProvider.pointer];
+    //print('${Favorites.getFavorite(track.id)} ${track.id}');
+    //? iconoMeGusta.meGustaMucho()
+    //: iconoMeGusta.noMeGusta();
+    //Favorites.getFavorite(track.id);
     return FloatingActionButton(
-      onPressed: () => iconoMeGusta.toggle(),
+      onPressed: () {
+        iconoMeGusta.meGusta = Favorites.getFavorite(track.id);
+        iconoMeGusta.toggle();
+        track.favorite = iconoMeGusta.meGusta;
+        iconoMeGusta.meGusta
+            ? Favorites.addFavorite(track.id)
+            : Favorites.quitFavorite(track.id);
+      },
       backgroundColor:
           DefaultTheme.defaultTheme.floatingActionButtonTheme.backgroundColor,
-      foregroundColor: (iconoMeGusta.meGusta
+      foregroundColor: Favorites.getFavorite(track.id)
           ? Color.fromARGB(255, 255, 0, 0)
-          : DefaultTheme
-              .defaultTheme.floatingActionButtonTheme.foregroundColor),
+          : DefaultTheme.defaultTheme.floatingActionButtonTheme.foregroundColor,
       child: const Icon(Icons.favorite),
     );
   }

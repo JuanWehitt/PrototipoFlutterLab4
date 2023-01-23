@@ -77,7 +77,7 @@ class _CustomListaAlbum extends State<ListaAlbum> {
             title: Text(listaAlbum.albums[index].name,
                 style: const TextStyle(color: Colors.black, fontSize: 18)),
             subtitle: Text(
-                '${artistas_de(index, listaAlbum)}${anio_de_album(index, listaAlbum)} - ${listaAlbum.albums[index].totalTracks} tracks'),
+                '${artistas_de(index, listaAlbum)}${anio_de_album(index, listaAlbum)} - ${listaAlbum.albums[index].totalTracks} ${listaAlbum.albums[index].totalTracks > 1 ? "canciones" : "cancion"}'),
             leading: Image(
                 image: NetworkImage(listaAlbum.albums[index].images[0].url,
                     scale: 0.9)),

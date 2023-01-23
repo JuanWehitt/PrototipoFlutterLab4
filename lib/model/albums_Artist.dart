@@ -5,7 +5,6 @@
 import 'dart:convert';
 
 import 'album.dart';
-import 'artists.dart';
 
 class AlbumModel {
   static AlbumData fromJson(String str) => AlbumData.fromJson(json.decode(str));

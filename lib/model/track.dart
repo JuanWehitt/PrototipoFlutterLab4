@@ -11,6 +11,7 @@ class Track {
   int trackNumber;
   String uri;
   int duration_ms;
+  bool favorite = false;
 
   Track(
       {required this.artists,
@@ -37,6 +38,10 @@ class Track {
       trackNumber: json["track_number"],
       uri: json["uri"],
       duration_ms: json["duration_ms"]);
+
+  setFavorite(bool value) {
+    this.favorite = value;
+  }
 }
 
 class ExternalUrls {

@@ -177,6 +177,12 @@ class _MyAppState extends State<CardTrack> {
                               player.playing
                                   ? controlPreview.play()
                                   : controlPreview.pause();
+                              player.playerStateStream.listen((state) {
+                                if (state.processingState ==
+                                    ProcessingState.completed) {
+                                  controlPreview.pause();
+                                }
+                              });
                             },
                             icon: controlPreview.playing
                                 ? const Icon(
@@ -197,9 +203,9 @@ class _MyAppState extends State<CardTrack> {
                 child: Container(
                   child: Image.asset(
                     "images/sound.gif",
-                    width: 40,
+                    width: controlPreview.playing ? 40 : 0,
                     height: 40,
-                    scale: controlPreview.playing ? 0.2 : 0.0,
+                    scale: 0.2,
                   ),
                 ),
               )
@@ -212,12 +218,12 @@ class _MyAppState extends State<CardTrack> {
 }
 
 String duration_track(int dur) {
-  double dur_m_d = (dur / 1000) / 60;
-  String dur_m = "";
-  dur_m_d.toInt() < 10
-      ? dur_m = "0${dur_m_d.toInt()}"
-      : dur_m = dur_m_d.toInt().toString();
-  String dur_m_s = dur_m_d.toStringAsFixed(2);
-  String dur_s = dur_m_s.substring(dur_m_s.indexOf(".") + 1, dur_m_s.length);
-  return '$dur_m:$dur_s';
+  double dur_m_d = (dur / 1000).toInt() / 60;
+  int minutes = dur_m_d.toInt();
+  double seconds_d = (minutes - dur_m_d) * -1;
+  seconds_d = seconds_d * 100;
+  int seconds = seconds_d.toInt() * 60 ~/ 100;
+  String minutes_s = minutes < 10 ? '0$minutes' : '$minutes';
+  String seconds_s = seconds < 10 ? '0$seconds' : '$seconds';
+  return '$minutes_s:$seconds_s';
 }

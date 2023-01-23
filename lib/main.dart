@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:prototipo_flutter_lab4/pages/track_page.dart';
+import 'package:prototipo_flutter_lab4/Shared_data/data.dart';
 import 'package:prototipo_flutter_lab4/pages/pages.dart';
-import 'package:prototipo_flutter_lab4/providers/preview_provider.dart';
 import 'package:prototipo_flutter_lab4/providers/providers.dart';
 import 'package:prototipo_flutter_lab4/themes/default_theme.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +9,8 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
+  await Notes.init();
+  await Favorites.init();
 
   runApp(MultiProvider(
     providers: [
@@ -32,7 +33,7 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   final String token =
-      "BQD8dy9qLaYCHS6lJRSLUo3IQm7SetwT5BOs90DDxyJYlUVSa0w3huva24IuTOQXhZBAC3R9dg3XFPSOOp5e5Rbsz4ntifA2Wr0MCOHMqIjOzbq8FEX7kXJmyMve7W7wdQOngJvaXzM4Y1swDhvwAc9fcXANEbTetadR8TfYohZcYmY38_4ZZkYTXvc2IwGure6eeNAKR-h1OWV_BmH9YA";
+      "BQAJUWlglxX-hP7_MzCu_ESrsHgyZdvLw6qUeYWTUi68IKcSw-yJ7GP8la9K9gVqwOt5o9eVOHSvieI--k4IpZWLpIyw5orpHsmXQjlRVqUeeZihK69PTFzMAYxIYS-4-Pjesbl3yySO8rOv07VydbUSytA9V3mmuUyrB1IQutlvFxErUPFKED7I5s0buB37LTY";
   const MyApp({super.key});
 
   // This widget is the root of your application.

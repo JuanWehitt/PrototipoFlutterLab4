@@ -27,7 +27,7 @@ class AlbumsProvider extends ChangeNotifier {
   getInfo(int offset) async {
     final url = Uri.http(_baseUrl, '/artist/$_idArtist/albums',
         {"include_groups": "album,single", "offset": "$offset"});
-    print(url);
+    //print(url);
     try {
       final response =
           await http.get(url, headers: {'access_token': _apiToken});
@@ -40,7 +40,7 @@ class AlbumsProvider extends ChangeNotifier {
         this.total = albumModel.data.total;
         this.offset = albumModel.data.offset;
         this.limit = albumModel.data.limit;
-        print("offset $offset - limit $limit - total $total ");
+        //print("offset $offset - limit $limit - total $total ");
         this.loadData = true;
       } else {
         print("no hay datos revise el token");

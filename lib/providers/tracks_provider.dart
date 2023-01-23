@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:prototipo_flutter_lab4/main.dart';
 
 import 'package:prototipo_flutter_lab4/model/tracks_Album.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/track.dart';
 
@@ -43,6 +44,8 @@ class TracksProvider extends ChangeNotifier {
         this.loadData = true;
         //print(tracksAlbumModel.data.items.length);
         this.tracks = [...tracksAlbumModel.data.items];
+
+        setearFavoritos();
         notifyListeners();
       } else {
         print("No hay resultados revise el token");
@@ -50,5 +53,12 @@ class TracksProvider extends ChangeNotifier {
     } catch (e) {
       print('error $e');
     }
+  }
+
+  void setearFavoritos() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    this.tracks.forEach((element) {
+      prefs.get('f_${element.id}') != null ? element.setFavorite(true) : null;
+    });
   }
 }
