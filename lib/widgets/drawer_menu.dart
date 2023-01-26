@@ -31,6 +31,13 @@ class DrawerMenu extends StatelessWidget {
             },
           ),
           const Divider(height: 5),
+          ListTile(
+            title: const Text('Favoritas'),
+            leading: const Icon(Icons.double_arrow_outlined),
+            onTap: () {
+              Navigator.pushReplacementNamed(context, 'listaFavoritas');
+            },
+          ),
         ],
       ),
     );
