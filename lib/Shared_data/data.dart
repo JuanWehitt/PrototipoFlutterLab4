@@ -7,6 +7,33 @@ class Favorites {
     _prefs = await SharedPreferences.getInstance();
   }
 
+  static List<String> getKeys() {
+    return _prefs.getKeys().toList();
+  }
+
+  static addFavorite(String idAlbum, String idTrack) {
+    List<String>? lista = _prefs.getStringList(idAlbum) ?? [];
+    !lista.contains(idTrack) ? lista.add(idTrack) : null;
+    _prefs.setStringList(idAlbum, lista);
+    //print('Agrego $id  ${_prefs.getStringList('favorites')!.length}');
+  }
+
+  static quitFavorite(String idAlbum, String idTrack) {
+    List<String>? lista = _prefs.getStringList(idAlbum) ?? [];
+    lista.contains(idTrack) ? lista.remove(idTrack) : null;
+    _prefs.setStringList(idAlbum, lista);
+    //print("intento quitar" + id);
+  }
+
+  static bool getFavorite(String idAlbum, String idTrack) {
+    //print(_prefs.getStringList('favorites'));
+
+    List<String>? lista = _prefs.getStringList(idAlbum) ?? [];
+    //print('esta $lista');
+    return lista.contains(idTrack);
+  }
+
+/*
   static addFavorite(String id) {
     List<String>? lista = _prefs.getStringList('favorites') ?? [];
     !lista.contains(id) ? lista.add(id) : null;
@@ -31,7 +58,7 @@ class Favorites {
       //print('NO esta $id');
       return false;
     }
-  }
+  }*/
 }
 
 class Notes {
