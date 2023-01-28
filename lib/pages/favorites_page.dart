@@ -48,7 +48,7 @@ class _CustomListaFavoritas extends State<ListaFavoritas> {
     String? idAlbum = FavoritesData.getFavoriteAlbum(idTrack);
     String _apiToken = dotenv.env['API_TOKEN_SPOTIFY'].toString();
     //_apiToken = MyApp().token;
-    const String baseUrl = 'localhost:3000';
+    final String baseUrl = dotenv.env['HOST'].toString();
     final url = Uri.http(baseUrl, "/albums/$idAlbum/tracks");
     final response = await http.get(url, headers: {'access_token': _apiToken});
     Track trackBuscado = Track(

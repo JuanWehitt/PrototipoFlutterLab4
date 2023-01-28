@@ -2,12 +2,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:prototipo_flutter_lab4/model/albums_Artist.dart';
-import '../main.dart';
 import '../model/album.dart';
 
 class AlbumsProvider extends ChangeNotifier {
-  String _apiToken = dotenv.env['API_TOKEN_SPOTIFY'].toString();
-  final String _baseUrl = 'localhost:3000';
+  final String _apiToken = dotenv.env['API_TOKEN_SPOTIFY'].toString();
+  final String _baseUrl = dotenv.env['HOST'].toString();
   final String _idArtist = "4gzpq5DPGxSnKTe4SA8HAU";
   List<Album> albums = [];
   int total = 0;
