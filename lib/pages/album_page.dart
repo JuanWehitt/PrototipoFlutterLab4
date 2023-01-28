@@ -15,8 +15,6 @@ class ListViewPageAlbum extends StatefulWidget {
 class _CustomListViewPageState extends State<ListViewPageAlbum> {
   double _opacityLevel = 0;
 
-  //ScrollController _scrollController = ScrollController();
-
   @override
   void initState() {
     super.initState();
@@ -71,7 +69,6 @@ class _CustomListViewPageState extends State<ListViewPageAlbum> {
                     child: Image.network(
                   album.images[0].url,
                   width: size.width * 0.8,
-                  //height: 300,
                 )),
               ),
               Padding(
@@ -100,7 +97,6 @@ class _CustomListViewPageState extends State<ListViewPageAlbum> {
               ),
               ListView.builder(
                 itemCount: tracksProvider.tracks.length,
-                //physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15, vertical: 10),

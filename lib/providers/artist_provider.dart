@@ -1,7 +1,3 @@
-// ignore_for_file: avoid_print
-
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -26,21 +22,18 @@ class ArtistProvider extends ChangeNotifier {
       uri: "uri");
 
   ArtistProvider() {
-    _apiToken = MyApp().token;
+    //_apiToken = MyApp().token;
     this.getInfo();
   }
 
   getInfo() async {
     final url = Uri.http(_baseUrl, "/artist/$_idArtist");
-
     try {
       final response =
           await http.get(url, headers: {'access_token': _apiToken});
-      final artist = ArtistModel.fromJson(response.body);
-      //print(response.body);
-      if (artist.code == 200) {
+      if (response.statusCode == 200) {
+        final artist = ArtistModel.fromJson(response.body);
         this.loadData = true;
-        //print(artist.data.images[0].url);
         this.artista = artist.data;
       } else {
         print("No hay resultados revise el token");

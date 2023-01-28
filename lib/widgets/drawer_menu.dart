@@ -1,8 +1,5 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 import 'package:prototipo_flutter_lab4/providers/artist_provider.dart';
-import 'package:prototipo_flutter_lab4/themes/default_theme.dart';
 import 'package:provider/provider.dart';
 
 class DrawerMenu extends StatelessWidget {

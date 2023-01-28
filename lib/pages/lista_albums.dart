@@ -30,9 +30,6 @@ class ListaAlbum extends StatefulWidget {
 
 class _CustomListaAlbum extends State<ListaAlbum> {
   double _opacityLevel = 0;
-  //double _height = 100.0;
-  //int _index = 1;
-  //ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -57,11 +54,6 @@ class _CustomListaAlbum extends State<ListaAlbum> {
       );
     }
 
-    if (listaAlbum.next()) {
-      listaAlbum.loadData = false;
-      listaAlbum.siguientePagina();
-    }
-
     return AnimatedOpacity(
       duration: const Duration(milliseconds: 500),
       opacity: _opacityLevel,
@@ -71,8 +63,6 @@ class _CustomListaAlbum extends State<ListaAlbum> {
           height: 5,
         ),
         itemBuilder: (context, index) {
-          //listaAlbum.photos[index].urls.small
-          listaAlbum.pointer = index;
           return ListTile(
             title: Text(listaAlbum.albums[index].name,
                 style: const TextStyle(color: Colors.black, fontSize: 18)),

@@ -38,10 +38,6 @@ class Track {
       trackNumber: json["track_number"],
       uri: json["uri"],
       duration_ms: json["duration_ms"]);
-
-  setFavorite(bool value) {
-    this.favorite = value;
-  }
 }
 
 class ExternalUrls {

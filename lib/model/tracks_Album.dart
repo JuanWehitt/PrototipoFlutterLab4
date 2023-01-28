@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final tracksAlbum = tracksAlbumFromJson(jsonString);
-
 import 'dart:convert';
 
 import 'track.dart';

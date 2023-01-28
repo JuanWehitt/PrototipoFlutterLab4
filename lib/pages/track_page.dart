@@ -3,14 +3,10 @@ import 'package:prototipo_flutter_lab4/themes/default_theme.dart';
 import 'package:provider/provider.dart';
 
 import '../Shared_data/data.dart';
-import '../model/album.dart';
-import '../model/track.dart';
 import '../providers/providers.dart';
 import '../widgets/widgets.dart';
 
 class CardPage extends StatelessWidget {
-  //final int nro;
-
   CardPage({super.key});
 
   final PageController pageController =
@@ -79,6 +75,7 @@ class ControlNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     //final botonera = Provider.of<TrackPageProvider>(context);
     final trackPageProvider = Provider.of<TrackPageProvider>(context);
+
     return BottomNavigationBar(
         currentIndex: trackPageProvider.botonActual,
         onTap: (value) {
@@ -111,23 +108,22 @@ class FavoritoActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final iconoMeGusta = Provider.of<FavoriteProvider>(context);
     final tracksProvider = Provider.of<TracksProvider>(context);
-    final Track track = tracksProvider.tracks[tracksProvider.pointer];
-    //print('${Favorites.getFavorite(track.id)} ${track.id}');
-    //? iconoMeGusta.meGustaMucho()
-    //: iconoMeGusta.noMeGusta();
-    //Favorites.getFavorite(track.id);
+    final track = tracksProvider.tracks[tracksProvider.pointer];
+    final albumsProvider = Provider.of<AlbumsProvider>(context);
+    final album = albumsProvider.albums[albumsProvider.pointer];
+
     return FloatingActionButton(
       onPressed: () {
-        iconoMeGusta.meGusta = Favorites.getFavorite(track.id);
+        iconoMeGusta.meGusta = FavoritesData.getFavorite(track.id);
         iconoMeGusta.toggle();
         track.favorite = iconoMeGusta.meGusta;
         iconoMeGusta.meGusta
-            ? Favorites.addFavorite(track.id)
-            : Favorites.quitFavorite(track.id);
+            ? FavoritesData.addFavorite(album.id, track.id)
+            : FavoritesData.quitFavorite(album.id, track.id);
       },
       backgroundColor:
           DefaultTheme.defaultTheme.floatingActionButtonTheme.backgroundColor,
-      foregroundColor: Favorites.getFavorite(track.id)
+      foregroundColor: FavoritesData.getFavorite(track.id)
           ? Color.fromARGB(255, 255, 0, 0)
           : DefaultTheme.defaultTheme.floatingActionButtonTheme.foregroundColor,
       child: const Icon(Icons.favorite),

@@ -10,7 +10,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
   await Notes.init();
-  await Favorites.init();
+  await FavoritesData.init();
 
   runApp(MultiProvider(
     providers: [
@@ -33,7 +33,7 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   final String token =
-      "BQAJUWlglxX-hP7_MzCu_ESrsHgyZdvLw6qUeYWTUi68IKcSw-yJ7GP8la9K9gVqwOt5o9eVOHSvieI--k4IpZWLpIyw5orpHsmXQjlRVqUeeZihK69PTFzMAYxIYS-4-Pjesbl3yySO8rOv07VydbUSytA9V3mmuUyrB1IQutlvFxErUPFKED7I5s0buB37LTY";
+      "BQBzCHrWQqO--TEs4V93nKHXloSCcR4321qvtWox54T4Fu0iX007OP08ipAZSfxckEkojmF3vfUiNnJMnSYy1IQ14Lawh8HgT9ZWroPXkszLFOhn7QNJVrTGWdHL8hN9eN3fm13k2LQBtDrezvdnfF826a7gCwQTGpgt3vj--_yhgTSZc2mWce0CYQDwnVgZN0i4vXr9e_JsAy-yyBFbLhA";
   const MyApp({super.key});
 
   // This widget is the root of your application.
@@ -49,6 +49,7 @@ class MyApp extends StatelessWidget {
           'listaAlbums': (context) => const ListViewPageAlbums(),
           'albumPage': (context) => const ListViewPageAlbum(),
           'trackPage': (context) => CardPage(),
+          'listaFavoritas': (context) => const ListViewPageFavorites(),
         });
   }
 }

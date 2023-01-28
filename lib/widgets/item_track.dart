@@ -17,6 +17,7 @@ class ItemTrack extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           tracksProvider.pointer = index;
+          //tracksProvider.idTrackSeleccionado = idTrack;
           Navigator.pushReplacementNamed(context, 'trackPage');
         },
         child: Container(
@@ -43,14 +44,8 @@ class ItemTrack extends StatelessWidget {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                      onTap: () {
-                        tracksProvider.pointer = index;
-                        Navigator.pushReplacementNamed(context, 'trackPage');
-                      },
-                      child: const Icon(Icons.arrow_forward_sharp)),
-                )
+                    padding: const EdgeInsets.all(8.0),
+                    child: const Icon(Icons.arrow_forward_sharp)),
               ]),
         ),
       ),

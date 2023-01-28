@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:prototipo_flutter_lab4/providers/preview_provider.dart';
 import 'package:prototipo_flutter_lab4/providers/providers.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -31,9 +30,8 @@ class _MyAppState extends State<CardTrack> {
   Widget build(BuildContext context) {
     final controlPreview = Provider.of<PreviewProvider>(context);
     final tracksProvider = Provider.of<TracksProvider>(context);
-    //final albumProvider = Provider.of<AlbumsProvider>(context);
+
     final url = tracksProvider.tracks[tracksProvider.pointer].previewUrl;
-    //await player.setUrl(url);
 
     return SizedBox(
       width: double.infinity,
@@ -42,7 +40,6 @@ class _MyAppState extends State<CardTrack> {
         child: Card(
           elevation: 10,
           child: Column(
-            //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               ListTile(
                 leading: Icon(Icons.music_note_sharp),

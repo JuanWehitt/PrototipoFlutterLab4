@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -17,31 +15,35 @@ class AlbumsProvider extends ChangeNotifier {
   int offset = 0;
   bool loadData = false;
   int pointer = 0;
+  String? idAlbumSeleccionado;
 
   AlbumsProvider() {
-    _apiToken = MyApp().token;
-    offset = 0;
+    //_apiToken = MyApp().token;
     getInfo(offset);
   }
 
   getInfo(int offset) async {
     final url = Uri.http(_baseUrl, '/artist/$_idArtist/albums',
         {"include_groups": "album,single", "offset": "$offset"});
-    //print(url);
+    offset == 0 ? albums = [] : null;
     try {
       final response =
           await http.get(url, headers: {'access_token': _apiToken});
-      final albumModel = AlbumModel.fromJson(response.body);
-      if (albumModel.code == 200) {
+      if (response.statusCode == 200) {
+        final albumModel = AlbumModel.fromJson(response.body);
         this.albums.addAll(albumModel.data.items);
-        //this.albums = [...albumModel.data.items];
-        this.albums.sort(
-            (a, b) => a.releaseDate.year.compareTo(b.releaseDate.year) * -1);
+
         this.total = albumModel.data.total;
         this.offset = albumModel.data.offset;
         this.limit = albumModel.data.limit;
-        //print("offset $offset - limit $limit - total $total ");
-        this.loadData = true;
+        if (!next()) {
+          loadData = true;
+          this.albums.sort(
+              (a, b) => a.releaseDate.year.compareTo(b.releaseDate.year) * -1);
+          offset = 0;
+        } else {
+          siguientePagina();
+        }
       } else {
         print("no hay datos revise el token");
       }
@@ -56,15 +58,29 @@ class AlbumsProvider extends ChangeNotifier {
   //offset 102 - limit 50 - total 105 = 105-(50+102)= -50
   //total - (limit + offset) >= 0 entonces siguiente pagina con nuevo offset
   bool next() {
-    bool hay = false;
-    if (total - (limit + offset) >= 0) {
-      hay = true;
-    }
-    return hay;
+    return (total - (limit + offset) >= 0);
   }
 
   siguientePagina() {
     int nuevoOffset = limit + offset + 1;
     getInfo(nuevoOffset);
+  }
+
+  int getPointerAlbumById(String idAlbum) {
+    int albumBuscado = -1;
+    int index = -1;
+    for (var album in albums) {
+      index++;
+      (idAlbum.compareTo(album.id)) == 0 ? albumBuscado = index : null;
+    }
+    return albumBuscado;
+  }
+
+  Album getAlbumById(String idAlbum) {
+    Album? albumBuscado;
+    for (var album in albums) {
+      (idAlbum.compareTo(album.id)) == 0 ? albumBuscado = album : null;
+    }
+    return albumBuscado!;
   }
 }

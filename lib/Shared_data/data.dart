@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Favorites {
+class FavoritesData {
   static late SharedPreferences _prefs;
 
   static Future<void> init() async {
@@ -8,57 +8,28 @@ class Favorites {
   }
 
   static List<String> getKeys() {
-    return _prefs.getKeys().toList();
+    List<String> lista = [];
+    _prefs.getKeys().forEach((element) {
+      !element.contains("note", 0) ? lista.add(element) : null;
+    });
+    return lista;
   }
 
   static addFavorite(String idAlbum, String idTrack) {
-    List<String>? lista = _prefs.getStringList(idAlbum) ?? [];
-    !lista.contains(idTrack) ? lista.add(idTrack) : null;
-    _prefs.setStringList(idAlbum, lista);
-    //print('Agrego $id  ${_prefs.getStringList('favorites')!.length}');
+    _prefs.setString(idTrack, idAlbum);
   }
 
   static quitFavorite(String idAlbum, String idTrack) {
-    List<String>? lista = _prefs.getStringList(idAlbum) ?? [];
-    lista.contains(idTrack) ? lista.remove(idTrack) : null;
-    _prefs.setStringList(idAlbum, lista);
-    //print("intento quitar" + id);
+    _prefs.remove(idTrack);
   }
 
-  static bool getFavorite(String idAlbum, String idTrack) {
-    //print(_prefs.getStringList('favorites'));
-
-    List<String>? lista = _prefs.getStringList(idAlbum) ?? [];
-    //print('esta $lista');
-    return lista.contains(idTrack);
+  static String? getFavoriteAlbum(String idTrack) {
+    return _prefs.getString(idTrack);
   }
 
-/*
-  static addFavorite(String id) {
-    List<String>? lista = _prefs.getStringList('favorites') ?? [];
-    !lista.contains(id) ? lista.add(id) : null;
-    _prefs.setStringList('favorites', lista);
-    //print('Agrego $id  ${_prefs.getStringList('favorites')!.length}');
+  static bool getFavorite(String idTrack) {
+    return _prefs.getString(idTrack) != null ? true : false;
   }
-
-  static quitFavorite(String id) {
-    List<String>? lista = _prefs.getStringList('favorites') ?? [];
-    lista.contains(id) ? lista.remove(id) : null;
-    _prefs.setStringList('favorites', lista);
-    //print("intento quitar" + id);
-  }
-
-  static bool getFavorite(String id) {
-    //print(_prefs.getStringList('favorites'));
-    if (_prefs.getStringList('favorites') != null) {
-      List<String>? lista = _prefs.getStringList('favorites') ?? [];
-      //print('esta $lista');
-      return lista.contains(id);
-    } else {
-      //print('NO esta $id');
-      return false;
-    }
-  }*/
 }
 
 class Notes {
@@ -69,7 +40,7 @@ class Notes {
   }
 
   static addNote(String id, String note) {
-    _prefs.setString(id, note);
+    _prefs.setString('note$id', note);
   }
 
   static quitNote(String id) {
@@ -77,6 +48,6 @@ class Notes {
   }
 
   static String? getNote(String id) {
-    return _prefs.getString(id);
+    return _prefs.getString('note$id');
   }
 }
