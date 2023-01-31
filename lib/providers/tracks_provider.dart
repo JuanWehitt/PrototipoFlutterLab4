@@ -10,7 +10,7 @@ import '../model/track.dart';
 
 class TracksProvider extends ChangeNotifier {
   String _apiToken = dotenv.env['API_TOKEN_SPOTIFY'].toString();
-  final String _baseUrl = 'localhost:3000';
+  final String _baseUrl = dotenv.env['HOST'].toString(); //'localhost:3000';
   String _idAlbum = "";
   bool loadData = false;
   List<Track> tracks = [];
