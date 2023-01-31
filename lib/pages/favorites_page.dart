@@ -126,7 +126,7 @@ class _CustomListaFavoritas extends State<ListaFavoritas> {
                       Icon(Icons.favorite),
                     ],
                   ),
-                  onTap: () {},
+                  //onTap: () {},
                   visualDensity: const VisualDensity(vertical: 3.9),
                   isThreeLine: false,
                 );
