@@ -8,3 +8,6 @@ En el Home se visualiza la cantidad de seguidores que posee Coldplay.
 Para acceder a la lista de albums, se ingresa mediante el menu de la izquierda.
 
 Se probo con ancho y alto del dispositivo : 420 x 620
+
+demo.env debe ser configurado
+cambiar a .env el nombre de archivo y completar con el Token, el host.
