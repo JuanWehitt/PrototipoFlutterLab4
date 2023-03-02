@@ -33,6 +33,7 @@ class BodyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final artist = Provider.of<ArtistProvider>(context);
+    artist.getInfo();
     if (!artist.loadData) {
       return const Center(
         child: SizedBox(
