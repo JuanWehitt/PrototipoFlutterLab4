@@ -7,7 +7,7 @@ import '../model/album.dart';
 class AlbumsProvider extends ChangeNotifier {
   final String _apiToken = dotenv.env['API_TOKEN_SPOTIFY'].toString();
   final String _baseUrl = dotenv.env['HOST'].toString();
-  final String _idArtist = "4gzpq5DPGxSnKTe4SA8HAU";
+  final String _idArtist = "2ye2Wgw4gimLv2eAKyk1NB";
   List<Album> albums = [];
   int total = 0;
   int limit = 0;

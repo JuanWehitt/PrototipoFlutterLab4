@@ -6,7 +6,7 @@ import 'package:prototipo_flutter_lab4/model/artist.dart';
 class ArtistProvider extends ChangeNotifier {
   final String _apiToken = dotenv.env['API_TOKEN_SPOTIFY'].toString();
   final String _baseUrl = dotenv.env['HOST'].toString();
-  final String _idArtist = "4gzpq5DPGxSnKTe4SA8HAU";
+  final String _idArtist = "2ye2Wgw4gimLv2eAKyk1NB";
   bool loadData = false;
   ArtistData artista = ArtistData(
       externalUrls: ExternalUrls(spotify: "spotify"),

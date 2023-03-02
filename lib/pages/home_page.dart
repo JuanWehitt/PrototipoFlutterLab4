@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Coldplay'),
+        title: const Text('Music in my Heart'),
         centerTitle: true,
         elevation: 10.0,
       ),
@@ -33,7 +33,7 @@ class BodyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final artist = Provider.of<ArtistProvider>(context);
-    artist.getInfo();
+    //artist.getInfo();
     if (!artist.loadData) {
       return const Center(
         child: SizedBox(
@@ -53,59 +53,71 @@ class BodyHome extends StatelessWidget {
         ),
       ),
       child: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 300),
-          child: Column(children: [
-            Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.favorite,
-                  size: 50,
-                  color: Colors.red,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.7),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Text(
-                    " ${artist.artista.followers.total} ",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const Text("seguidores en",
-                    style: TextStyle(
-                      fontSize: 25,
-                      fontFamily: 'PaytoneOne',
-                      fontWeight: FontWeight.w300,
-                      color: Colors.white,
-                      shadows: [
-                        Shadow(
-                          blurRadius: 3.0,
-                          color: Colors.black,
-                          offset: Offset(3.0, 3.0),
-                        ),
-                      ],
-                    )),
-                Padding(
-                    padding: const EdgeInsets.only(top: 5.0),
-                    child: Container(
-                      width: 193,
-                      height: 76,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(15),
-                        //color: Colors.black54,
-                        image: DecorationImage(
-                          image: AssetImage("images/spotify_logo.png"),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ))
-              ],
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 50),
+              child: Text(
+                artist.artista.name,
+                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+              ),
             ),
-          ]),
+            Padding(
+              padding: const EdgeInsets.only(top: 250),
+              child: Column(children: [
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.favorite,
+                      size: 50,
+                      color: Colors.red,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.7),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Text(
+                        " ${artist.artista.followers.total} ",
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    const Text("seguidores en",
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontFamily: 'PaytoneOne',
+                          fontWeight: FontWeight.w300,
+                          color: Colors.white,
+                          shadows: [
+                            Shadow(
+                              blurRadius: 3.0,
+                              color: Colors.black,
+                              offset: Offset(3.0, 3.0),
+                            ),
+                          ],
+                        )),
+                    Padding(
+                        padding: const EdgeInsets.only(top: 5.0),
+                        child: Container(
+                          width: 193,
+                          height: 76,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(15),
+                            //color: Colors.black54,
+                            image: DecorationImage(
+                              image: AssetImage("images/spotify_logo.png"),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ))
+                  ],
+                ),
+              ]),
+            ),
+          ],
         ),
       ),
     );

@@ -58,8 +58,8 @@ class _DrawerHeader extends StatelessWidget {
               opacity: 0.9)),
       child: Container(
         alignment: Alignment.bottomRight,
-        child: const Text(
-          'Coldplay Menu',
+        child: Text(
+          '${artist.artista.name} Menu',
           style: TextStyle(
             color: Colors.white,
             fontSize: 19,
