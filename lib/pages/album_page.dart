@@ -57,53 +57,58 @@ class _CustomListViewPageState extends State<ListViewPageAlbum> {
         )),
       ),
       //drawer: const DrawerMenu(),
-      body: AnimatedOpacity(
-        opacity: _opacityLevel,
-        duration: const Duration(milliseconds: 500),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Center(
-                  child: Image.network(
-                album.images[0].url,
-                width: size.width * 0.8,
-              )),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: Container(
-                alignment: Alignment.center,
-                width: size.width * 0.99,
-                //height: 40,
-                decoration: BoxDecoration(
-                  color: Colors.blueGrey,
-                  borderRadius: BorderRadius.circular(10),
+      body: ListView(
+        children: [
+          AnimatedOpacity(
+            opacity: _opacityLevel,
+            duration: const Duration(milliseconds: 500),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Center(
+                      child: Image.network(
+                    album.images[0].url,
+                    width: size.width * 0.8,
+                  )),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                          '${compositores(album.artists)}${anio_de_album(album)} -'),
-                      Text(
-                          '- ${cantidad_de_canciones(album.totalTracks)} - ${explicito(tracksProvider)}'),
-                    ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: size.width * 0.99,
+                    //height: 40,
+                    decoration: BoxDecoration(
+                      color: Colors.blueGrey,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                              '${compositores(album.artists)}${anio_de_album(album)} -'),
+                          Text(
+                              '- ${cantidad_de_canciones(album.totalTracks)} - ${explicito(tracksProvider)}'),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                ListView.builder(
+                  itemCount: tracksProvider.tracks.length,
+                  shrinkWrap: true,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  itemBuilder: (BuildContext context, int index) {
+                    return ItemTrack(index: index);
+                  },
+                )
+              ],
             ),
-            ListView.builder(
-              itemCount: tracksProvider.tracks.length,
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-              itemBuilder: (BuildContext context, int index) {
-                return ItemTrack(index: index);
-              },
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }
