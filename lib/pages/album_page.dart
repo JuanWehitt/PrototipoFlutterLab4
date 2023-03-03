@@ -88,7 +88,7 @@ class _CustomListViewPageState extends State<ListViewPageAlbum> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                              '${compositores(album.artists)}${anio_de_album(album)} -'),
+                              '${interpretes(album.artists)}${anio_de_album(album)} -'),
                           Text(
                               '- ${cantidad_de_canciones(album.totalTracks)} - ${explicito(tracksProvider)}'),
                         ],
@@ -130,7 +130,7 @@ String anio_de_album(Album album) {
   return album.releaseDate.year.toString();
 }
 
-String compositores(List<Artists> artists) {
+String interpretes(List<Artists> artists) {
   String cadena = "";
   for (var element in artists) {
     cadena += " - ${element.name}";

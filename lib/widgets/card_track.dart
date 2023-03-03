@@ -50,7 +50,7 @@ class _MyAppState extends State<CardTrack> {
                   style: TextStyle(fontFamily: 'FuzzyBubbles'),
                 ),
                 subtitle: const Text(
-                  "Titulo",
+                  "Título",
                   style: TextStyle(fontSize: 14, fontFamily: 'FuzzyBubbles'),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -60,14 +60,14 @@ class _MyAppState extends State<CardTrack> {
               ListTile(
                 leading: Icon(Icons.people_rounded),
                 title: Text(
-                  compositores(
+                  interpretes(
                       tracksProvider.tracks[tracksProvider.pointer].artists),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontFamily: 'FuzzyBubbles'),
                 ),
                 subtitle: const Text(
-                  "Compositores",
+                  "Intérpretes",
                   style: TextStyle(fontSize: 14, fontFamily: 'FuzzyBubbles'),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,

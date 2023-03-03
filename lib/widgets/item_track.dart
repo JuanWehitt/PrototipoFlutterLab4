@@ -33,20 +33,21 @@ class ItemTrack extends StatelessWidget {
                     offset: Offset(0, 6))
               ]),
           child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Row(
-                  children: [
-                    const Icon(Icons.music_note,
-                        size: 40, color: DefaultTheme.primary),
-                    Text(tracksProvider.tracks[index].name),
-                  ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Icon(Icons.music_note,
+                  size: 40, color: DefaultTheme.primary),
+              Expanded(
+                child: Text(
+                  tracksProvider.tracks[index].name,
                 ),
-                Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: const Icon(Icons.arrow_forward_sharp)),
-              ]),
+              ),
+              Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: const Icon(Icons.arrow_forward_sharp)),
+            ],
+          ),
         ),
       ),
     );
